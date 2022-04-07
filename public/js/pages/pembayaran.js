@@ -68,7 +68,6 @@ $(document).ready(function () {
 
     $("#example2 tbody").on('click', '.btn-detail', function () {
         var data = table.row( $(this).parents('tr') ).data();
-        console.log(data);
         $("#no").val(data.no_pendaftaran);
         $("#nama").val(data.nama);
         $("#prodi").val(data.prodi_lulus);

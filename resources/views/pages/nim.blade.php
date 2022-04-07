@@ -42,14 +42,6 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td class="text-center">XXXXXX</td>
-                                            <td><a href="#" class="btn-nim">JOHN DOE</a></td>
-                                            <td>XXX XXXXXXXXXXXX</td>
-                                            <td class="text-center">1</td>
-                                            <td class="text-center"></td>
-                                            <td class="text-center">XX-XX-XXXX</td>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
