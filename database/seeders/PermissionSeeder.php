@@ -15,7 +15,7 @@ class PermissionSeeder extends Seeder
     public function run()
     {
 
-        $permissions = ['validasi', 'lolos', 'pembayaran', 'rekom-internal', 'rekom-eksternal', 'nim', 'manajamen'];
+        $permissions = ['validasi', 'lolos', 'pembayaran', 'rekom-internal', 'rekom-eksternal', 'nim', 'manajemen'];
 
         for ($i=0; $i < count($permissions); $i++) {
             Permission::create([
