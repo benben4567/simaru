@@ -24,6 +24,7 @@ Auth::routes([
 
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/chart', [App\Http\Controllers\HomeController::class, 'chart'])->name('chart');
 
     Route::group(['prefix' => 'validasi', 'as' => 'validasi.'], function(){
         Route::get('', [App\Http\Controllers\ValidasiController::class, 'index'])->name('index');

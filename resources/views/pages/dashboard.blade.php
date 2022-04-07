@@ -32,10 +32,7 @@
 
                         <div class="info-box-content">
                             <span class="info-box-text">Maba Validasi</span>
-                            <span class="info-box-number">
-                                10
-                                <small>%</small>
-                            </span>
+                            <span class="info-box-number counter">{{ $dashboard['validasi'] }}</span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -49,7 +46,7 @@
 
                         <div class="info-box-content">
                             <span class="info-box-text">Lolos Seleksi</span>
-                            <span class="info-box-number">41,410</span>
+                            <span class="info-box-number counter">{{ $dashboard['lolos'] }}</span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -67,7 +64,7 @@
 
                         <div class="info-box-content">
                             <span class="info-box-text">Rekom Internal</span>
-                            <span class="info-box-number">760</span>
+                            <span class="info-box-number counter">{{ $dashboard['internal'] }}</span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -81,7 +78,7 @@
 
                         <div class="info-box-content">
                             <span class="info-box-text">Rekom Eksternal</span>
-                            <span class="info-box-number">2,000</span>
+                            <span class="info-box-number counter">{{ $dashboard['eksternal'] }}</span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -99,20 +96,18 @@
                         </div>
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
-                                <h5 class="text-danger"><i class="fas fa-exclamation-circle mr-1"></i>
-                                    BELUM DIAJUKAN</h5>
-                                <p class="text-lg"><span class="font-weight-bold">1</span></p>
+                                <h5 class="text-danger"><i class="fas fa-exclamation-circle mr-1"></i>BELUM DIAJUKAN</h5>
+                                <p class="text-lg"><span class="font-weight-bold counter">{{ $dashboard['in_belum'] }}</span></p>
                             </div>
                             <!-- /.d-flex -->
                             <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
-                                <h5 class="text-warning"><i class="fas fa-redo mr-1"></i> PROSES</h5>
-                                <p class="text-lg"><span class="font-weight-bold">1</span></p>
+                                <h5 class="text-warning"><i class="fas fa-redo mr-1"></i>PROSES</h5>
+                                <p class="text-lg"><span class="font-weight-bold counter">{{ $dashboard['in_proses'] }}</span></p>
                             </div>
                             <!-- /.d-flex -->
                             <div class="d-flex justify-content-between align-items-center mb-0">
-                                <h5 class="text-success"><i class="fas fa-check-circle mr-1"></i> SELESAI
-                                </h5>
-                                <p class="text-lg"><span class="font-weight-bold">1</span></p>
+                                <h5 class="text-success"><i class="fas fa-check-circle mr-1"></i>SELESAI</h5>
+                                <p class="text-lg"><span class="font-weight-bold counter">{{ $dashboard['in_selesai'] }}</span></p>
                             </div>
                             <!-- /.d-flex -->
                         </div>
@@ -125,20 +120,18 @@
                         </div>
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
-                                <h5 class="text-danger"><i class="fas fa-exclamation-circle mr-1"></i>
-                                    BELUM DIAJUKAN</h5>
-                                <p class="text-lg"><span class="font-weight-bold">1</span></p>
+                                <h5 class="text-danger"><i class="fas fa-exclamation-circle mr-1"></i>BELUM DIAJUKAN</h5>
+                                <p class="text-lg"><span class="font-weight-bold counter">{{ $dashboard['ek_belum'] }}</span></p>
                             </div>
                             <!-- /.d-flex -->
                             <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
-                                <h5 class="text-warning"><i class="fas fa-redo mr-1"></i> PROSES</h5>
-                                <p class="text-lg"><span class="font-weight-bold">1</span></p>
+                                <h5 class="text-warning"><i class="fas fa-redo mr-1"></i>PROSES</h5>
+                                <p class="text-lg"><span class="font-weight-bold counter">{{ $dashboard['ek_proses'] }}</span></p>
                             </div>
                             <!-- /.d-flex -->
                             <div class="d-flex justify-content-between align-items-center mb-0">
-                                <h5 class="text-success"><i class="fas fa-check-circle mr-1"></i> SELESAI
-                                </h5>
-                                <p class="text-lg"><span class="font-weight-bold">1</span></p>
+                                <h5 class="text-success"><i class="fas fa-check-circle mr-1"></i>SELESAI</h5>
+                                <p class="text-lg"><span class="font-weight-bold counter">{{ $dashboard['ek_selesai'] }}</span></p>
                             </div>
                             <!-- /.d-flex -->
                         </div>
@@ -151,14 +144,13 @@
                         </div>
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
-                                <h5 class="text-danger"><i class="fas fa-exclamation-circle mr-1"></i>
-                                    BELUM</h5>
-                                <p class="text-lg"><span class="font-weight-bold">1</span></p>
+                                <h5 class="text-danger"><i class="fas fa-exclamation-circle mr-1"></i>BELUM</h5>
+                                <p class="text-lg"><span class="font-weight-bold counter">{{ $dashboard['nim_belum'] }}</span></p>
                             </div>
                             <!-- /.d-flex -->
                             <div class="d-flex justify-content-between align-items-center mb-0">
-                                <h5 class="text-success"><i class="fas fa-check-circle mr-1"></i> SUDAH</h5>
-                                <p class="text-lg"><span class="font-weight-bold">1</span></p>
+                                <h5 class="text-success"><i class="fas fa-check-circle mr-1"></i>SUDAH</h5>
+                                <p class="text-lg"><span class="font-weight-bold counter">{{ $dashboard['nim_sudah'] }}</span></p>
                             </div>
                             <!-- /.d-flex -->
                         </div>
@@ -190,17 +182,17 @@
                                     <h5>PEMBAYARAN</h5>
                                     <div class="description-block mb-4">
                                         <h5 class="description-header"> < 50% </h5>
-                                        <span class="badge bg-info description-text"> 1234 </span>
+                                        <span class="badge bg-danger description-text counter"> {{ $dashboard['belum'] }} </span>
                                     </div>
                                     <!-- /.description-block -->
                                     <div class="description-block mb-4">
                                         <h5 class="description-header"> > 50% </h5>
-                                        <span class="badge bg-info description-text"> 1234 </span>
+                                        <span class="badge bg-warning description-text counter"> {{ $dashboard['setengah'] }} </span>
                                     </div>
                                     <!-- /.description-block -->
                                     <div class="description-block">
                                         <h5 class="description-header">LUNAS</h5>
-                                        <span class="badge bg-info description-text"> 1234 </span>
+                                        <span class="badge bg-success description-text counter"> {{ $dashboard['lunas'] }} </span>
                                     </div>
                                     <!-- /.description-block -->
                                 </div><!-- /.card-pane-right -->
@@ -247,6 +239,8 @@
 <!-- ChartJS -->
 <script src="{{asset("plugins/chart.js/Chart.min.js")}}"></script>
 <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
+<!-- Counter UP -->
+<script src="https://unpkg.com/counterup2@2.0.2/dist/index.js">	</script>
 @endpush
 
 @push('js')
