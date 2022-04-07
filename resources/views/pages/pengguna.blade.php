@@ -99,6 +99,7 @@
                                 </button>
                         </div>
                         <form method="post" id="form-permission">
+                            <input type="text" class="d-none" name="id">
                             <div class="modal-body">
                                 <div class="form-row">
                                     @foreach ($permissions as $p)

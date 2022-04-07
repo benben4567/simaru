@@ -31,6 +31,10 @@
                         </p>
                     </a>
                 </li>
+
+                <li class="nav-header">OPERATOR</li>
+
+                @can('validasi')
                 <li class="nav-item">
                     <a href="{{ route('validasi.index') }}" class="nav-link {{ set_active('validasi.*') }}">
                         <i class="nav-icon fas fa-clipboard-check"></i>
@@ -39,6 +43,9 @@
                         </p>
                     </a>
                 </li>
+                @endcan
+
+                @can('lolos')
                 <li class="nav-item">
                     <a href="{{ route('lolos.index') }}" class="nav-link {{ set_active('lolos.*') }}">
                         <i class="nav-icon fas fa-user-check"></i>
@@ -47,6 +54,9 @@
                         </p>
                     </a>
                 </li>
+                @endcan
+
+                @can('pembayaran')
                 <li class="nav-item">
                     <a href="{{ route("pembayaran.index") }}" class="nav-link {{ set_active("pembayaran.*") }}">
                         <i class="nav-icon fas fa-money-bill-wave"></i>
@@ -55,6 +65,9 @@
                         </p>
                     </a>
                 </li>
+                @endcan
+
+                @if(auth()->user()->can('rekom-eksternal') || auth()->user()->can('rekom-internal'))
                 <li class="nav-item {{ set_active("rekomendasi.*", "menu-open") }}">
                     <a href="#" class="nav-link {{ set_active("rekomendasi.*") }}">
                         <i class="nav-icon fas fa-file-signature"></i>
@@ -64,20 +77,27 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                        @can('rekom-internal')
                         <li class="nav-item">
                             <a href="{{ route('rekomendasi.internal') }}" class="nav-link {{ set_active("rekomendasi.internal") }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Internal</p>
                             </a>
                         </li>
+                        @endcan
+                        @can('rekom-eksternal')
                         <li class="nav-item">
                             <a href="{{ route('rekomendasi.eksternal') }}" class="nav-link {{ set_active("rekomendasi.eksternal") }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Eksternal</p>
                             </a>
                         </li>
+                        @endcan
                     </ul>
                 </li>
+                @endif
+
+                @can('nim')
                 <li class="nav-item">
                     <a href="{{ route("nim.index") }}" class="nav-link {{ set_active("nim.*") }}">
                         <i class="nav-icon fas fa-id-card"></i>
@@ -86,6 +106,9 @@
                         </p>
                     </a>
                 </li>
+                @endcan
+
+                @can('manajemen')
                 <li class="nav-header">MANAJEMEN</li>
                 <li class="nav-item">
                     <a href="{{ route("prodi.index") }}" class="nav-link {{ set_active("prodi.*") }}">
@@ -111,6 +134,7 @@
                         </p>
                     </a>
                 </li>
+                @endcan
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

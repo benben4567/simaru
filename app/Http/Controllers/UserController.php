@@ -76,7 +76,7 @@ class UserController extends Controller
 
     public function permission(Request $request)
     {
-        $user = Auth::user();
+        $user = User::find($request->id);
         try {
             $user->syncPermissions($request->permissions);
 

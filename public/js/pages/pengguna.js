@@ -85,6 +85,7 @@ $(function () {
             },
             success: function (response) {
                 var data = response.data
+                $("input[name='id']").val(id);
                 for (let index = 0; index < data.length; index++) {
                     const id = data[index].id;
                     $('#permission'+id).attr('checked','checked');
