@@ -14,7 +14,10 @@ class NimController extends Controller
     {
         if ($request->ajax()) {
             $periode = Periode::where('status', 'buka')->first();
-            $maba = Maba::select('no_pendaftaran', 'nama', 'prodi_lulus', 'gelombang', 'nim', 'tgl_nim')->where('periode_id', $periode->id)->where('pembayaran', 'lunas')->get();
+            $maba = Maba::select('no_pendaftaran', 'nama', 'prodi_lulus', 'gelombang', 'nim', 'tgl_nim')
+                    ->where('periode_id', $periode->id)
+                    ->where('pembayaran', 'lunas')
+                    ->get();
             return ResponseFormatter::success($maba, "Data Maba");
         }
         return view('pages.nim');

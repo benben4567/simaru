@@ -12,7 +12,6 @@ $(document).ready(function () {
         "paging": true,
         "lengthChange": false,
         "searching": true,
-        "ordering": false,
         "autoWidth": false,
         "responsive": true,
         "columnDefs": [

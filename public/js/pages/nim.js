@@ -13,14 +13,14 @@ $(document).ready(function () {
         "paging": true,
         "lengthChange": false,
         "searching": true,
-        "ordering": false,
         "autoWidth": false,
         "responsive": true,
+        "order": [[ 4, "desc" ]],
         "columnDefs": [
             {
                 targets: 0,
                 className: "text-center",
-                width: "15%",
+                width: "13%",
                 data: "no_pendaftaran"
             },
             {
@@ -33,7 +33,7 @@ $(document).ready(function () {
             {
                 targets: 2,
                 className: "text-center",
-                width: "20%",
+                width: "24%",
                 data: "prodi_lulus"
             },
             {
@@ -45,7 +45,7 @@ $(document).ready(function () {
             {
                 targets: 4,
                 className: "text-center",
-                width: "13%",
+                width: "10%",
                 data: "nim",
                 render: function (data, type, row, meta) {
                     if(data){
@@ -58,7 +58,7 @@ $(document).ready(function () {
             {
                 targets: 5,
                 className: "text-center",
-                width: "15%",
+                width: "13%",
                 data: "tgl_nim",
                 render: function (data, type, row, meta) {
                     if(data){
