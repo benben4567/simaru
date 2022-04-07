@@ -42,6 +42,7 @@ Route::group(['middleware' => 'auth'], function(){
     });
 
     Route::group(['prefix' => 'rekomendasi', 'as' => 'rekomendasi.'], function(){
+        Route::post('', [App\Http\Controllers\RekomendasiController::class, 'store'])->name('store');
         Route::get('/internal', [App\Http\Controllers\RekomendasiController::class, 'internal'])->name('internal');
         Route::get('/eksternal', [App\Http\Controllers\RekomendasiController::class, 'eksternal'])->name('eksternal');
     });

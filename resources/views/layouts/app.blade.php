@@ -102,6 +102,11 @@
 
     <!-- AdminLTE App -->
     <script src="{{asset("js/adminlte.js")}}"></script>
+    <script>
+        $(function () {
+            $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+        });
+    </script>
 
     @stack('js')
 </body>

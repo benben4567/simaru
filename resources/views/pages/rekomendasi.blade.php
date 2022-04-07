@@ -8,6 +8,7 @@
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1>Rekomendasi {{ $jenis }}</h1>
+                        <input type="text" class="d-none" id="jenis" value="{{ $jenis }}">
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -41,45 +42,6 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td class="text-center align-middle">XXXXXX</td>
-                                            <td class="align-middle">JOHN DOE</td>
-                                            <td>
-                                                FOO BAR </br>
-                                                <a href="https://wa.me/6281380801441" target="_blank">081380801441</a>
-                                            </td>
-                                            <td class="text-center align-middle"><button type="button"
-                                                    class="btn btn-danger btn-xs btn-rekom">BELUM</button></td>
-                                            <td class="text-center align-middle"><button type="button"
-                                                    class="btn btn-danger btn-sm" title="Download"><i
-                                                        class="fas fa-file-pdf"></i></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center align-middle">XXXXXX</td>
-                                            <td class="align-middle">JOHN DOE</td>
-                                            <td>
-                                                FOO BAR </br>
-                                                <a href="https://wa.me/6281380801441" target="_blank">081380801441</a>
-                                            </td>
-                                            <td class="text-center align-middle"><button type="button"
-                                                    class="btn btn-warning btn-xs btn-rekom">PROSES</button></td>
-                                            <td class="text-center align-middle"><button type="button"
-                                                    class="btn btn-danger btn-sm" title="Download"><i
-                                                        class="fas fa-file-pdf"></i></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center align-middle">XXXXXX</td>
-                                            <td class="align-middle">JOHN DOE</td>
-                                            <td>
-                                                FOO BAR </br>
-                                                <a href="https://wa.me/6281380801441" target="_blank">081380801441</a>
-                                            </td>
-                                            <td class="text-center align-middle"><button type="button"
-                                                    class="btn btn-success btn-xs btn-rekom">SELESAI</button></td>
-                                            <td class="text-center align-middle"><button type="button"
-                                                    class="btn btn-danger btn-sm" title="Download"><i
-                                                        class="fas fa-file-pdf"></i></button></td>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -104,6 +66,7 @@
                             </button>
                         </div>
                         <form method="post" id="form-input">
+                            <input type="text" class="d-none" name="no" id="no">
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label>Tanggal Pengajuan</label>

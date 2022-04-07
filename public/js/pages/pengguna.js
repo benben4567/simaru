@@ -9,8 +9,6 @@ $(function () {
         $('form').trigger("reset");
     })
 
-    $("body").tooltip({ selector: '[data-toggle=tooltip]' });
-
     var table = $('#example2').DataTable({
         "ajax": "/pengguna",
         "paging": true,
