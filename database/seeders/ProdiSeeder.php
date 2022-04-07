@@ -20,7 +20,7 @@ class ProdiSeeder extends Seeder
             'D3 Akupunktur',
             'D3 Farmasi',
             'D3 RMIK',
-            'Sarjana Terapana Kebidanan',
+            'Sarjana Terapan Kebidanan',
             'Profesi Bidan',
             'S1 Farmasi Klinis',
             'S1 Fisioterapi',
