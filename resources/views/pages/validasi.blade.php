@@ -37,6 +37,7 @@
                                         <th>Nama</th>
                                         <th>Jalur</th>
                                         <th>Gelombang</th>
+                                        <th>Lolos Seleksi</th>
                                         <th>Tgl Input</th>
                                     </tr>
                                 </thead>

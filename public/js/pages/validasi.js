@@ -63,6 +63,19 @@ $(document).ready(function () {
             },
             {
                 targets: 4,
+                className: "text-center align-middle",
+                width: "12%",
+                data: "prodi_lulus",
+                render: function (data, type, row, meta) {
+                    if (data) {
+                        return `<i class="fas fa-check-square text-success"></i>`
+                    } else {
+                        return "-"
+                    }
+                }
+            },
+            {
+                targets: 5,
                 className: "text-center",
                 width: "15%",
                 data: "tgl_validasi",

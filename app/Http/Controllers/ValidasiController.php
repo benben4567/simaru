@@ -16,7 +16,7 @@ class ValidasiController extends Controller
     {
         if ($request->ajax()) {
             $periode = Periode::where('status', 'buka')->first();
-            $maba = Maba::select('no_pendaftaran', 'nama', 'jalur_pendaftaran', 'gelombang', 'tgl_validasi')
+            $maba = Maba::select('no_pendaftaran', 'nama', 'jalur_pendaftaran', 'gelombang', 'tgl_validasi', 'prodi_lulus')
                     ->where('periode_id', $periode->id)
                     ->get();
             return ResponseFormatter::success($maba, "Data User");
