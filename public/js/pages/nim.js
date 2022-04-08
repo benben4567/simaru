@@ -15,7 +15,7 @@ $(document).ready(function () {
         "searching": true,
         "autoWidth": false,
         "responsive": true,
-        "order": [[ 4, "desc" ]],
+        "order": [[ 5, "desc" ]],
         "columnDefs": [
             {
                 targets: 0,
@@ -46,6 +46,12 @@ $(document).ready(function () {
                 targets: 4,
                 className: "text-center",
                 width: "10%",
+                data: "jalur_pendaftaran"
+            },
+            {
+                targets: 5,
+                className: "text-center",
+                width: "10%",
                 data: "nim",
                 render: function (data, type, row, meta) {
                     if(data){
@@ -56,7 +62,7 @@ $(document).ready(function () {
                 }
             },
             {
-                targets: 5,
+                targets: 6,
                 className: "text-center",
                 width: "13%",
                 data: "tgl_nim",

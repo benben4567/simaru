@@ -37,6 +37,7 @@
                                             <th>Nama</th>
                                             <th>Prodi</th>
                                             <th>Gelombang</th>
+                                            <th>Jalur</th>
                                             <th>NIM</th>
                                             <th>Tgl Input</th>
                                         </tr>
