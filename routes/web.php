@@ -66,6 +66,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::post('', [App\Http\Controllers\UserController::class, 'store'])->name('store');
         Route::get('/akses/{id}', [App\Http\Controllers\UserController::class, 'getPermission'])->name('getpermission');
         Route::post('/akses', [App\Http\Controllers\UserController::class, 'permission'])->name('permission');
+        Route::put('/password', [App\Http\Controllers\UserController::class, 'password'])->name('password');
     });
 
 
