@@ -113,6 +113,59 @@
                 </div>
             </div>
 
+            <!-- Modal Update -->
+            <div class="modal fade" id="modal-update" role="dialog" aria-labelledby="modalUpdate" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Update Data Lolos</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form method="post" id="form-update">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label>No. Pendaftaran</label>
+                                    <input type="text" class="form-control" name="no" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>Nama</label>
+                                    <input type="text" class="form-control" name="nama" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>Prodi Lolos</label>
+                                    <select class="form-control" name="prodi_lolos" required>
+                                        <option>- pilih -</option>
+                                        @foreach ($prodi as $p)
+                                            <option value="{{ $p->name }}">{{ $p->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label>Nilai Ujian</label>
+                                            <input type="text" class="form-control nilai" name="nilai" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="">Tanggal Daftar</label>
+                                            <input type="date" class="form-control" name="tgl_daftar" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
         </section>
         <!-- /.content -->
     </div>

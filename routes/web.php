@@ -36,6 +36,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::group(['middleware' => ['permission:lolos'], 'prefix' => 'lolos', 'as' => 'lolos.'], function(){
         Route::get('', [App\Http\Controllers\LolosController::class, 'index'])->name('index');
         Route::post('', [App\Http\Controllers\LolosController::class, 'store'])->name('store');
+        Route::put('', [App\Http\Controllers\LolosController::class, 'update'])->name('update');
+        Route::get('/edit/{id}', [App\Http\Controllers\LolosController::class, 'edit'])->name('edit');
         Route::get('/maba/show/{id}', [App\Http\Controllers\LolosController::class, 'show'])->name('show');
     });
 

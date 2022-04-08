@@ -53,7 +53,10 @@ $(document).ready(function () {
             },
             {
                 targets: 1,
-                data: "nama"
+                data: "nama",
+                render: function (data, type, row, meta) {
+                    return `<a href="#" class="btn-update">${data}</a>`
+                }
             },
             {
                 targets: 2,
@@ -121,6 +124,60 @@ $(document).ready(function () {
             success: function(response){
                 $.LoadingOverlay("hide");
                 $("#modal-input").modal('hide');
+                table.ajax.reload();
+                Swal.fire("Berhasil!", response.meta.message, "success");
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                $.LoadingOverlay("hide");
+                Swal.fire("Error!", xhr.statusText, "error");
+                console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+
+    $("#example2 tbody").on("click", ".btn-update", function (e) {
+        e.preventDefault();
+
+        var data = table.row( $(this).parents('tr') ).data();
+
+        $.ajax({
+            type: "GET",
+            url: "/lolos/edit/"+data.no_pendaftaran,
+            beforeSend: function () {
+                $.LoadingOverlay("show")
+            },
+            success: function (response) {
+                $.LoadingOverlay("hide")
+                var data = response.data
+                $("input[name='no']").val(data.no_pendaftaran);
+                $("input[name='nama']").val(data.nama);
+                $("select[name='prodi_lolos']").val(data.prodi_lulus).change();
+                $("input[name='nilai']").val(data.nilai);
+                $("input[name='tgl_daftar']").val(data.tgl_pendaftaran);
+
+                $("#modal-update").modal("show");
+            },
+            error: function (xhr, status, err) {
+                $.LoadingOverlay("hide")
+                console.log(xhr.responseJSON)
+            }
+        });
+    })
+
+    $("#form-update").submit(function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: "PUT",
+            url: "/lolos",
+            data: $(this).serialize(),
+            dataType: "JSON",
+            beforeSend: function() {
+                $.LoadingOverlay("show");
+            },
+            success: function(response){
+                $.LoadingOverlay("hide");
+                $("#modal-update").modal('hide');
                 table.ajax.reload();
                 Swal.fire("Berhasil!", response.meta.message, "success");
             },
