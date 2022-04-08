@@ -63,6 +63,12 @@ Route::group(['middleware' => 'auth'], function(){
         Route::put('', [App\Http\Controllers\ProdiController::class, 'update'])->name('update');
     });
 
+    Route::group(['middleware' => ['permission:manajemen'], 'prefix' => 'periode', 'as' => 'periode.'], function(){
+        Route::get('', [App\Http\Controllers\PeriodeController::class, 'index'])->name('index');
+        Route::post('', [App\Http\Controllers\PeriodeController::class, 'store'])->name('store');
+        Route::put('', [App\Http\Controllers\PeriodeController::class, 'update'])->name('update');
+    });
+
     Route::group(['middleware' => ['permission:manajemen'], 'prefix' => 'pengguna', 'as' => 'pengguna.'], function(){
         Route::get('', [App\Http\Controllers\UserController::class, 'index'])->name('index');
         Route::put('', [App\Http\Controllers\UserController::class, 'update'])->name('update');

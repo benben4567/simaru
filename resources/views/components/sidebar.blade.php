@@ -109,30 +109,49 @@
                 @endcan
 
                 @can('manajemen')
-                <li class="nav-header">MANAJEMEN</li>
+                <li class="nav-header">ADMINISTRATOR</li>
                 <li class="nav-item">
-                    <a href="{{ route("prodi.index") }}" class="nav-link {{ set_active("prodi.*") }}">
-                        <i class="nav-icon fas fa-university"></i>
+                    <a href="{{ route("periode.index") }}" class="nav-link {{ set_active("periode.*") }}">
+                        <i class="nav-icon fas fa-calendar-alt"></i>
                         <p>
-                            Program Studi
+                            Periode
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route("pengguna.index") }}" class="nav-link {{ set_active("pengguna.*") }}">
-                        <i class="nav-icon fas fa-users"></i>
+                <li class="nav-item {{ set_active(["pengguna.*", "prodi.*", "log.*"], "menu-open") }}">
+                    <a href="#" class="nav-link {{ set_active(["pengguna.*", "prodi.*", "log.*"]) }}">
+                        <i class="nav-icon fas fa-cogs"></i>
                         <p>
-                            Pengguna
+                            Manajemen
+                            <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-history"></i>
-                        <p>
-                            Log Aktivitas
-                        </p>
-                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route("prodi.index") }}" class="nav-link {{ set_active("prodi.*") }}">
+                                <i class="nav-icon fas fa-university"></i>
+                                <p>
+                                    Program Studi
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route("pengguna.index") }}" class="nav-link {{ set_active("pengguna.*") }}">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p>
+                                    Pengguna
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-history"></i>
+                                <p>
+                                    Log Aktivitas
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 @endcan
             </ul>

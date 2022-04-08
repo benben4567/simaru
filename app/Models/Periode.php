@@ -10,7 +10,7 @@ class Periode extends Model
     use HasFactory;
 
     protected $table = "periode";
-    protected $fillabel = ['tahun', 'status'];
+    protected $fillable = ['tahun', 'status'];
 
     public function maba()
     {
