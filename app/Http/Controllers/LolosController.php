@@ -25,10 +25,15 @@ class LolosController extends Controller
 
     public function show($no_pendaftaran)
     {
-        $maba = Maba::select('id', 'nama')->where('no_pendaftaran', $no_pendaftaran)->first();
+        $maba = Maba::select('id', 'nama', 'prodi_lulus')->where('no_pendaftaran', $no_pendaftaran)->first();
 
         if ($maba) {
-            return ResponseFormatter::success($maba, "Data User");
+
+            if ($maba->prodi_lulus) {
+                return ResponseFormatter::error($maba, "Data sudah ada", 409);
+            }
+
+            return ResponseFormatter::success($maba, "Data Maba");
         }
 
         return ResponseFormatter::error(null, "Data tidak ditemukan", 404);

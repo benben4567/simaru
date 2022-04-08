@@ -116,8 +116,18 @@ $(document).ready(function () {
             },
             error: function(xhr, ajaxOptions, thrownError) {
                 $.LoadingOverlay("hide");
-                Swal.fire("Error!", xhr.statusText, "error");
                 console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            },
+            statusCode: {
+                422: function() {
+                    Swal.fire("Error!", "Data yang dikirim tidak valid", "error");
+                },
+                409: function() {
+                    Swal.fire("Error!", "Data sudah terdaftar", "error");
+                },
+                500: function() {
+                    Swal.fire("Error!", "Terjadi Kesalahan di Server", "error");
+                },
             }
         });
     });

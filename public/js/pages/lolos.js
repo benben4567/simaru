@@ -98,9 +98,12 @@ $(document).ready(function () {
                 switch (xhr.status) {
                     case 404:
                         Swal.fire("Error!", "Data tidak ditemukan", "error");
+                    case 409:
+                        Swal.fire("Error!", "Data sudah ada", "error");
                     }
                 console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-            }
+            },
+
         });
     });
 

@@ -47,6 +47,13 @@ class ValidasiController extends Controller
         }
 
         try {
+            // check if maba is exist
+            $maba = Maba::where('no_pendaftaran', $request->no)->count();
+            if ($maba) {
+                return ResponseFormatter::error(null, "Data maba sudah ada", 409);
+            }
+
+            // check if file is exist
             if ($request->file('file')) {
                 $file = $request->file('file');
                 $ext = $file->getClientOriginalExtension();
