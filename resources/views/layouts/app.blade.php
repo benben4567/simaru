@@ -35,8 +35,7 @@
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
-                            class="fas fa-bars"></i></a>
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 {{-- <li class="nav-item d-none d-sm-inline-block">
                     <a href="index3.html" class="nav-link">Home</a>
@@ -49,6 +48,9 @@
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
+                    <button type="button" class="btn btn-info mr-2" data-toggle="modal" data-target="#modal-password"><i class="fas fa-lock mr-1"></i>Ubah Password</button>
+                </li>
+                <li class="nav-item">
                     <a class="btn btn-danger" href="{{ route('logout') }}" role="button" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="fas fa-sign-out-alt mr-1"></i>Keluar
                     </a>
@@ -58,6 +60,8 @@
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                 @csrf
             </form>
+
+
         </nav>
         <!-- /.navbar -->
 
@@ -66,6 +70,37 @@
 
         <!-- Content Wrapper. Contains page content -->
         @yield('content')
+
+        <!-- Modal -->
+        <div class="modal fade" id="modal-password" tabindex="-1" role="dialog" aria-labelledby="modalPassword" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modal Password</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="" id="form-password">
+                        <div class="modal-body">
+                            <input type="text" class="d-none" name="id" value="{{ auth()->user()->id }}">
+                            <div class="form-group">
+                                <label>Password Baru</label>
+                                <input type="password" class="form-control" name="password" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Ulangi Password</label>
+                                <input type="password" class="form-control" name="password_confirmation" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
@@ -104,7 +139,39 @@
     <script src="{{asset("js/adminlte.js")}}"></script>
     <script>
         $(function () {
-            $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('.modal').on('hidden.bs.modal', function (e) {
+                $('form').trigger("reset");
+            })
+
+            $('#form-password').submit(function (e) {
+                e.preventDefault();
+
+                $.ajax({
+                    type: "PUT",
+                    url: "/password",
+                    data: $(this).serialize(),
+                    beforeSend: function () {
+                        $.LoadingOverlay("show");
+                    },
+                    success: function (response) {
+                        $.LoadingOverlay("hide");
+                        $("#modal-password").modal('hide');
+                        Swal.fire("Berhasil!", response.meta.message, "success");
+                    },
+                    error: function (xhr, status, err) {
+                        $.LoadingOverlay("hide");
+                        Swal.fire("Error!", "Terjadi Kesalahan di Server", "error");
+                        console.log(xhr)
+                    }
+                });
+            });
+
         });
     </script>
 
