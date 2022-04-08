@@ -47,7 +47,10 @@ $(document).ready(function () {
             },
             {
                 targets: 1,
-                data: "nama"
+                data: "nama",
+                render: function (data, type, row, meta) {
+                    return `<a href="#" class="btn-detail">${data}</a>`
+                }
             },
             {
                 targets: 2,
@@ -115,6 +118,36 @@ $(document).ready(function () {
                 $.LoadingOverlay("hide");
                 Swal.fire("Error!", xhr.statusText, "error");
                 console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+
+    $("#example2 tbody").on("click", ".btn-detail", function (e) {
+        e.preventDefault();
+        var data = table.row( $(this).parents('tr') ).data();
+
+        $.ajax({
+            type: "GET",
+            url: "/validasi/show",
+            data: {no: data.no_pendaftaran},
+            beforeSend: function () {
+                $.LoadingOverlay("show")
+            },
+            success: function (response) {
+                $.LoadingOverlay("hide")
+                $.each(response.data, function (index, value) {
+                    $(`#${index}`).val(value);
+                });
+                $("#modal-detail").modal("show");
+            },
+            error: function (xhr, status, err) {
+                $.LoadingOverlay("hide")
+                console.log(xhr.responseJSON)
+            },
+            statusCode: {
+                404: function() {
+                    Swal.fire("Oops!", "Data tidak ditemukan", "error");
+                }
             }
         });
     });

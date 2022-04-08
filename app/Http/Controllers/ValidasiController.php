@@ -78,4 +78,17 @@ class ValidasiController extends Controller
             return ResponseFormatter::error($e->getMessage(), 'Terjadi Kesalahan di Server');
         }
     }
+
+    public function show(Request $request)
+    {
+        $maba = Maba::select('no_pendaftaran', 'nama', 'telp', 'prodi_1', 'prodi_2', 'jalur_pendaftaran', 'gelombang', 'rekomendasi', 'nama_perekom', 'telp_perekom')
+                    ->where('no_pendaftaran', $request->no)
+                    ->first();
+
+        if ($maba) {
+            return ResponseFormatter::success($maba, "Data Maba");
+        }
+
+        return ResponseFormatter::error(null, "Data tidak ditemukan", 404);
+    }
 }

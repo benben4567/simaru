@@ -186,6 +186,97 @@
             </div>
         </div>
 
+        <!-- Modal Detail -->
+        <div class="modal fade" id="modal-detail" tabindex="-1" role="dialog" aria-labelledby="modalDetail" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Detail Maba</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="">
+                            <div class="form-row">
+                                <div class="col-lg-2 col-sm-12">
+                                    <div class="form-group">
+                                        <label>No. Pendaftaran</label>
+                                        <input type="text" class="form-control" id="no_pendaftaran" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Nama Lengkap</label>
+                                        <input type="text" class="form-control" id="nama" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>No. HP</label>
+                                        <input type="text" class="form-control" id="telp" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Prodi 1</label>
+                                        <input type="text" class="form-control" id="prodi_1" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Prodi 2</label>
+                                        <input type="text" class="form-control" id="prodi_2" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Jalur</label>
+                                        <input type="text" class="form-control" id="jalur_pendaftaran" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Gelombang</label>
+                                        <input type="text" class="form-control" id="gelombang" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Rekomendasi</label>
+                                        <input type="text" class="form-control" id="rekomendasi" style="text-transform: capitalize" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Nama Perekom</label>
+                                        <input type="text" class="form-control" style="text-transform: uppercase;" id="nama_perekom" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label>No.HP Perekom</label>
+                                            <input type="text" class="form-control" id="telp_perekom" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </section>
     <!-- /.content -->
 </div>
