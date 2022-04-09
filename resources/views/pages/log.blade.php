@@ -38,8 +38,8 @@
                                             <th>Method</th>
                                             <th>User Agent</th>
                                             <th>Subject</th>
-                                            <th>User ID</th>
                                             <th>Description</th>
+                                            <th>Timestamp</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -54,10 +54,11 @@
                                             </td>
                                             <td>
                                                 {{ $act->subject }}</br>
-                                                ID: {{ $act->subject_id }}
+                                                ID: {{ $act->subject_id }}</br>
+                                                Causer ID: {{ $act->causer_id }}
                                             </td>
-                                            <td>{{ $act->causer_id }}</td>
                                             <td>{{ $act->description }}</td>
+                                            <td>{{ $act->created_at }}</td>
                                         </tr>
 
                                         @endforeach
