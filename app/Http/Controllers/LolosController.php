@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Logger;
 use App\Helpers\ResponseFormatter;
 use App\Models\Maba;
 use App\Models\Periode;
@@ -54,15 +55,19 @@ class LolosController extends Controller
 
         try {
 
-            $maba = Maba::where("no_pendaftaran", $request->no)->update([
+            $maba = Maba::where("no_pendaftaran", $request->no)->first();
+            $maba->update([
                 "prodi_lulus" => $request->prodi_lolos,
                 "nilai" => $request->nilai,
                 "tgl_pendaftaran" => $request->tgl_daftar,
                 "tgl_lulus" => now()
             ]);
 
+            Logger::info($maba, 'updated to lolos');
+
             return ResponseFormatter::success($maba, "Data Berhasil Disimpan", 201);
         } catch (\Exception $e) {
+            Logger::error($maba, $e->getMessage());
             return ResponseFormatter::error($e->getMessage(), 'Terjadi Kesalahan di Server');
         }
     }
@@ -93,14 +98,18 @@ class LolosController extends Controller
 
         try {
 
-            $maba = Maba::where("no_pendaftaran", $request->no)->update([
+            $maba = Maba::where("no_pendaftaran", $request->no)->first();
+            $maba->update([
                 "prodi_lulus" => $request->prodi_lolos,
                 "nilai" => $request->nilai,
                 "tgl_pendaftaran" => $request->tgl_daftar,
             ]);
+            Logger::info($maba, 'updating lolos');
 
             return ResponseFormatter::success($maba, "Data Berhasil Disimpan", 201);
         } catch (\Exception $e) {
+
+            Logger::error($maba, $e->getMessage());
             return ResponseFormatter::error($e->getMessage(), 'Terjadi Kesalahan di Server');
         }
     }

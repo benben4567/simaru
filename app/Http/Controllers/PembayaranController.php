@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Logger;
 use App\Helpers\ResponseFormatter;
 use App\Models\Maba;
 use App\Models\Periode;
@@ -33,13 +34,17 @@ class PembayaranController extends Controller
 
         try {
 
-            $maba = Maba::where("no_pendaftaran", $request->no)->update([
+            $maba = Maba::where("no_pendaftaran", $request->no)->first();
+            $maba->update([
                 "pembayaran" => $request->pembayaran,
                 "tgl_pembayaran" => now()
             ]);
 
+            Logger::info($maba, 'updating pembayaran');
+
             return ResponseFormatter::success($maba, "Data Berhasil Disimpan", 201);
         } catch (\Exception $e) {
+            Logger::error($maba, $e->getMessage());
             return ResponseFormatter::error($e->getMessage(), 'Terjadi Kesalahan di Server');
         }
     }

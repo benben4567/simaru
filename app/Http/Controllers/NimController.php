@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Logger;
 use App\Helpers\ResponseFormatter;
 use App\Models\Maba;
 use App\Models\Periode;
@@ -36,13 +37,17 @@ class NimController extends Controller
 
         try {
 
-            $maba = Maba::where("no_pendaftaran", $request->no)->update([
+            $maba = Maba::where("no_pendaftaran", $request->no)->first();
+            $maba->update([
                 "nim" => $request->nim,
                 "tgl_nim" => now()
             ]);
 
+            Logger::info($maba, 'updating NIM');
+
             return ResponseFormatter::success($maba, "Data Berhasil Disimpan", 201);
         } catch (\Exception $e) {
+            Logger::error($maba, $e->getMessage());
             return ResponseFormatter::error($e->getMessage(), 'Terjadi Kesalahan di Server');
         }
     }

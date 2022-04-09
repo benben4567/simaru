@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Logger;
 use App\Helpers\ResponseFormatter;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -43,8 +44,12 @@ class UserController extends Controller
                 "password" => Hash::make($request->password)
             ]);
 
+            Logger::info($user, 'created');
+
             return ResponseFormatter::success($user, "Data Berhasil Disimpan", 201);
         } catch (\Exception $e) {
+            Logger::error($user, $e->getMessage());
+
             return ResponseFormatter::error($e->getMessage(), 'Terjadi Kesalahan di Server');
         }
     }
@@ -62,14 +67,19 @@ class UserController extends Controller
         }
 
         try {
-            $user = User::whereId($request->id)->update([
+            $user = User::find($request->id);
+            $user->update([
                 "name" => $request->nama,
                 "email" => $request->email,
                 "status" => $request->status
             ]);
 
+            Logger::info($user, 'updated');
+
             return ResponseFormatter::success($user, "Data Berhasil Disimpan", 201);
         } catch (\Exception $e) {
+            Logger::error($user, $e->getMessage());
+
             return ResponseFormatter::error($e->getMessage(), 'Terjadi Kesalahan di Server');
         }
     }
@@ -80,8 +90,12 @@ class UserController extends Controller
         try {
             $user->syncPermissions($request->permissions);
 
+            Logger::info($user, 'permission updated');
+
             return ResponseFormatter::success(User::with('permissions')->get(), 'Data Berhasil Disimpan');
         } catch (\Exception $e) {
+            Logger::error($user, $e->getMessage());
+
             return ResponseFormatter::error($e->getMessage(), 'Terjadi Kesalahan di Server');
         }
     }
@@ -104,12 +118,17 @@ class UserController extends Controller
         }
 
         try {
-            $user = User::whereId($request->id)->update([
+            $user = User::find($request->id);
+            $user->update([
                 "password" => Hash::make($request->password)
             ]);
 
+            Logger::info($user, 'password updated');
+
             return ResponseFormatter::success($user, "Data Berhasil Disimpan", 201);
         } catch (\Exception $e) {
+            Logger::error($user, $e->getMessage());
+
             return ResponseFormatter::error($e->getMessage(), 'Terjadi Kesalahan di Server');
         }
     }

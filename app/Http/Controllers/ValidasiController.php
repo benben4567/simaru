@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Logger;
 use App\Helpers\ResponseFormatter;
 use App\Models\Maba;
 use App\Models\Periode;
@@ -80,8 +81,11 @@ class ValidasiController extends Controller
                 "tgl_validasi" => now()
             ]);
 
+            Logger::info($maba, 'created');
+
             return ResponseFormatter::success($maba, "Data Berhasil Disimpan", 201);
         } catch (\Exception $e) {
+            Logger::error($maba, $e->getMessage());
             return ResponseFormatter::error($e->getMessage(), 'Terjadi Kesalahan di Server');
         }
     }

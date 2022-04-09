@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Logger;
 use App\Helpers\ResponseFormatter;
 use App\Models\Prodi;
 use Illuminate\Http\Request;
@@ -34,8 +35,11 @@ class ProdiController extends Controller
                 "name" => $request->nama,
             ]);
 
+            Logger::info($prodi, 'created');
+
             return ResponseFormatter::success($prodi, "Data Berhasil Disimpan", 201);
         } catch (\Exception $e) {
+            Logger::error($prodi, $e->getMessage());
             return ResponseFormatter::error($e->getMessage(), 'Terjadi Kesalahan di Server');
         }
     }
@@ -51,12 +55,16 @@ class ProdiController extends Controller
         }
 
         try {
-            $prodi = Prodi::whereId($request->id)->update([
+            $prodi = Prodi::find($request->id);
+            $prodi->update([
                 "name" => $request->nama,
             ]);
 
+            Logger::info($prodi, 'updated');
+
             return ResponseFormatter::success($prodi, "Data Berhasil Disimpan", 201);
         } catch (\Exception $e) {
+            Logger::error($prodi, $e->getMessage());
             return ResponseFormatter::error($e->getMessage(), 'Terjadi Kesalahan di Server');
         }
     }
