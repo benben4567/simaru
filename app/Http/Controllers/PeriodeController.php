@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Logger;
 use App\Helpers\ResponseFormatter;
 use App\Models\Periode;
 use Illuminate\Http\Request;
@@ -44,8 +45,11 @@ class PeriodeController extends Controller
             }
 
             if ($request->status == 'buka') {
-                Periode::where('tahun', $request->tahun)->update(['status' => 'buka']);
-                Periode::whereNotIn('tahun', [$request->tahun])->update(['status' => 'tutup']);
+                Periode::query()->update(['status' => 'tutup']);
+                $periode = Periode::find($request->id);
+                $periode->update(['status' => 'buka']);
+
+                Logger::info($periode, 'updated');
 
                 return ResponseFormatter::success($periode, "Periode");
             } else {

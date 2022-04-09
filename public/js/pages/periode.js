@@ -51,7 +51,7 @@ $(function () {
                     if (data == 'buka') {
                         return `<input type="checkbox" class="toggle" checked data-toggle="toggle" data-width="100" data-height="20" data-onstyle="success" data-offstyle="danger" data-on="Buka" data-off="Tutup">`
                     }
-                    return `<input type="checkbox" class="toggle" data-tahun="${row.tahun}" data-toggle="toggle" data-width="100" data-height="20" data-onstyle="success" data-offstyle="danger" data-on="Buka" data-off="Tutup">`
+                    return `<input type="checkbox" class="toggle" data-id="${row.id}" data-toggle="toggle" data-width="100" data-height="20" data-onstyle="success" data-offstyle="danger" data-on="Buka" data-off="Tutup">`
                 }
             }
         ],
@@ -92,7 +92,7 @@ $(function () {
 
     $('#example2').on('change', 'tbody input.toggle', function () {
         var cb = $(this).prop('checked');
-        var tahun = $(this).data('tahun');
+        var id = $(this).data('id');
 
         if (cb) {
             var status = 'buka'
@@ -103,7 +103,7 @@ $(function () {
         $.ajax({
             type: "PUT",
             url: "/periode",
-            data: {tahun: tahun, status: status},
+            data: {id: id, status: status},
             success: function (response) {
                 table.ajax.reload(function() {
                     $("input[data-toggle='toggle']").bootstrapToggle();

@@ -78,5 +78,9 @@ Route::group(['middleware' => 'auth'], function(){
         Route::put('/password', [App\Http\Controllers\UserController::class, 'password'])->name('password');
     });
 
+    Route::group(['middleware' => ['permission:manajemen'], 'prefix' => 'log', 'as' => 'log.'], function(){
+        Route::get('', [App\Http\Controllers\LogController::class, 'index'])->name('index');
+    });
+
 
 });
