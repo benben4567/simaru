@@ -19,4 +19,19 @@ class Logger
 
         Log::create($log);
     }
+
+    public static function error($subject, $description = null)
+    {
+        $log['level'] = 'error';
+        $log['url'] = request()->fullUrl();
+        $log['method'] = request()->method();
+        $log['ip'] = request()->ip();
+        $log['agent'] = request()->header('user-agent');
+        $log['subject'] = get_class($subject);
+        $log['subject_id'] = null;
+        $log['causer_id'] = auth()->user()->id;
+        $log['description'] = $description;
+
+        Log::create($log);
+    }
 }
