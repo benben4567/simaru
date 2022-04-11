@@ -134,7 +134,7 @@
                                 </button>
                         </div>
                         <form method="post" id="form-password">
-                            <input type="text" class="d-none" value="id" id="id">
+                            <input type="text" class="d-none" name="id" id="id">
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label>Password Baru</label>
