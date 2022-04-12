@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::group(['middleware' => ['permission:validasi'], 'prefix' => 'validasi', 'as' => 'validasi.'], function(){
         Route::get('', [App\Http\Controllers\ValidasiController::class, 'index'])->name('index');
         Route::post('', [App\Http\Controllers\ValidasiController::class, 'store'])->name('store');
+        Route::post('/update', [App\Http\Controllers\ValidasiController::class, 'update'])->name('update');
         Route::get('/show', [App\Http\Controllers\ValidasiController::class, 'show'])->name('show');
     });
 

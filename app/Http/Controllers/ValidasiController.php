@@ -61,7 +61,7 @@ class ValidasiController extends Controller
                 $filename = $request->rekomendasi."_surat_rekom_".$request->no.".".$ext;
                 $path = Storage::putFileAs('public/rekomendasi', $request->file('file'), $filename);
             } else {
-                $path = null;
+                $filename = null;
             }
 
             $periode = Periode::where('status', 'buka')->first();
@@ -77,7 +77,7 @@ class ValidasiController extends Controller
                 "rekomendasi" => $request->rekomendasi,
                 "nama_perekom" => $request->nama_perekom,
                 "telp_perekom" => $request->nohp_perekom,
-                "file_rekom" => $path,
+                "file_rekom" => $filename,
                 "tgl_validasi" => now()
             ]);
 
@@ -92,7 +92,7 @@ class ValidasiController extends Controller
 
     public function show(Request $request)
     {
-        $maba = Maba::select('no_pendaftaran', 'nama', 'telp', 'prodi_1', 'prodi_2', 'jalur_pendaftaran', 'gelombang', 'rekomendasi', 'nama_perekom', 'telp_perekom')
+        $maba = Maba::select('id', 'no_pendaftaran', 'nama', 'telp', 'prodi_1', 'prodi_2', 'jalur_pendaftaran', 'gelombang', 'rekomendasi', 'nama_perekom', 'telp_perekom')
                     ->where('no_pendaftaran', $request->no)
                     ->first();
 
@@ -101,5 +101,60 @@ class ValidasiController extends Controller
         }
 
         return ResponseFormatter::error(null, "Data tidak ditemukan", 404);
+    }
+
+    public function update(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            "no_pendaftaran" => 'required',
+            "nama" => 'required',
+            "telp" => 'required',
+            "prodi_1" => 'required',
+            "prodi_2" => 'required',
+            "jalur_pendaftaran" => 'required',
+            "gelombang" => 'required',
+            "rekomendasi" => 'nullable',
+            "nama_perekom" => 'nullable',
+            "telp_perekom" => 'nullable',
+            "file" => 'nullable|mimes:pdf',
+        ]);
+
+        if ($validator->fails()) {
+            return ResponseFormatter::error($validator->errors(), "Data tidak valid", 422);
+        }
+
+        try {
+            // check if file is exist
+            if ($request->file('file')) {
+                $file = $request->file('file');
+                $ext = $file->getClientOriginalExtension();
+                $filename = $request->rekomendasi."_surat_rekom_".$request->no_pendaftaran.".".$ext;
+                $path = Storage::putFileAs('public/rekomendasi', $request->file('file'), $filename);
+            } else {
+                $filename = null;
+            }
+            $maba = Maba::find($request->id);
+            $update = $maba->update([
+                "no_pendaftaran" => $request->no_pendaftaran,
+                "nama" => strtoupper($request->nama),
+                "telp" => $request->telp,
+                "prodi_1" => $request->prodi_1,
+                "prodi_2" => $request->prodi_2,
+                "jalur_pendaftaran" => $request->jalur_pendaftaran,
+                "gelombang" => $request->gelombang,
+                "rekomendasi" => $request->rekomendasi,
+                "nama_perekom" => $request->nama_perekom,
+                "telp_perekom" => $request->telp_perekom,
+                "file_rekom" => $filename,
+            ]);
+
+            Logger::info($maba, 'created');
+
+            return ResponseFormatter::success($update, "Data Berhasil Disimpan", 201);
+        } catch (\Exception $e) {
+            Logger::error($maba, $e->getMessage());
+            return ResponseFormatter::error($e->getMessage(), 'Terjadi Kesalahan di Server');
+        }
     }
 }

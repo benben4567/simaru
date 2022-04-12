@@ -69,7 +69,7 @@ $(document).ready(function () {
                 data: 'file_rekom',
                 render: function (data, type, row, meta) {
                     if (data) {
-                        return `<a class="btn btn-danger btn-sm" href="${data}" target="_blank" role="button" data-toggle="tooltip" title="Download"><i class="fas fa-file-pdf"></i></a>`
+                        return `<a class="btn btn-danger btn-sm" href="/storage/rekomendasi/${data}" target="_blank" role="button" data-toggle="tooltip" title="Download"><i class="fas fa-file-pdf"></i></a>`
                     } else {
                         return `<a class="btn btn-secondary btn-sm" href="#" role="button"><i class="fas fa-file-pdf"></i></a>`
                     }

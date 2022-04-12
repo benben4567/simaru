@@ -145,7 +145,7 @@
                                 <select class="form-control" name="rekomendasi" requried>
                                     <option value="">Tidak Ada</option>
                                     <option value="internal">Internal</option>
-                                    <option value="external">Eksternal</option>
+                                    <option value="eksternal">Eksternal</option>
                                 </select>
                             </div>
                             <div class="form-row">
@@ -186,35 +186,36 @@
             </div>
         </div>
 
-        <!-- Modal Detail -->
-        <div class="modal fade" id="modal-detail" tabindex="-1" role="dialog" aria-labelledby="modalDetail" aria-hidden="true">
+        <!-- Modal Update -->
+        <div class="modal fade" id="modal-update" tabindex="-1" role="dialog" aria-labelledby="modalUpdate" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Detail Maba</h5>
+                        <h5 class="modal-title">Update Validasi</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <form action="">
+                    <form action="" method="post" id="form-update" autocomplete="off" enctype="multipart/form-data">
+                        <div class="modal-body">
+                            <input type="text" class="d-none" name="id" id="id">
                             <div class="form-row">
                                 <div class="col-lg-2 col-sm-12">
                                     <div class="form-group">
                                         <label>No. Pendaftaran</label>
-                                        <input type="text" class="form-control" id="no_pendaftaran" disabled>
+                                        <input type="text" class="form-control numeric" name="no_pendaftaran" id="no_pendaftaran">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-sm-12">
                                     <div class="form-group">
                                         <label>Nama Lengkap</label>
-                                        <input type="text" class="form-control" id="nama" disabled>
+                                        <input type="text" class="form-control" name="nama" id="nama">
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-sm-12">
                                     <div class="form-group">
                                         <label>No. HP</label>
-                                        <input type="text" class="form-control" id="telp" disabled>
+                                        <input type="text" class="form-control phone" name="telp" id="telp">
                                     </div>
                                 </div>
                             </div>
@@ -222,13 +223,21 @@
                                 <div class="col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label>Prodi 1</label>
-                                        <input type="text" class="form-control" id="prodi_1" disabled>
+                                        <select class="form-control" name="prodi_1" id="prodi_1">
+                                            @foreach ($prodi as $p)
+                                                <option value="{{ $p->name }}">{{ $p->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label>Prodi 2</label>
-                                        <input type="text" class="form-control" id="prodi_2" disabled>
+                                        <select class="form-control" name="prodi_2" id="prodi_2">
+                                            @foreach ($prodi as $p)
+                                                <option value="{{ $p->name }}">{{ $p->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -236,13 +245,19 @@
                                 <div class="col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label>Jalur</label>
-                                        <input type="text" class="form-control" id="jalur_pendaftaran" disabled>
+                                        <input type="text" class="form-control" name="jalur_pendaftaran" id="jalur_pendaftaran">
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label>Gelombang</label>
-                                        <input type="text" class="form-control" id="gelombang" disabled>
+                                        <select class="form-control" name="gelombang" id="gelombang">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -250,29 +265,43 @@
                                 <div class="col-md-4 col-sm-12">
                                     <div class="form-group">
                                         <label>Rekomendasi</label>
-                                        <input type="text" class="form-control" id="rekomendasi" style="text-transform: capitalize" disabled>
+                                        <select class="form-control" name="rekomendasi" id="rekomendasi" requried>
+                                            <option value="">Tidak Ada</option>
+                                            <option value="internal">Internal</option>
+                                            <option value="eksternal">Eksternal</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-sm-12">
                                     <div class="form-group">
                                         <label>Nama Perekom</label>
-                                        <input type="text" class="form-control" style="text-transform: uppercase;" id="nama_perekom" disabled>
+                                        <input type="text" class="form-control" style="text-transform: uppercase;" name="nama_perekom" id="nama_perekom">
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-sm-12">
                                     <div class="form-group">
                                         <div class="form-group">
                                             <label>No.HP Perekom</label>
-                                            <input type="text" class="form-control" id="telp_perekom" disabled>
+                                            <input type="text" class="form-control phone" name="telp_perekom" id="telp_perekom">
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                    </div>
+                            <div class="form-group">
+                                <label for="exampleInputFile">File Rekom</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" name="file" id="exampleInputFile">
+                                        <label class="custom-file-label" for="exampleInputFile">Pilih</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

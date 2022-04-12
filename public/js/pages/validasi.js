@@ -148,7 +148,11 @@ $(document).ready(function () {
                 $.each(response.data, function (index, value) {
                     $(`#${index}`).val(value);
                 });
-                $("#modal-detail").modal("show");
+
+                $("#rekomendasi").val(response.data.rekomendasi).change();
+                $("#prodi_1").val(response.data.prodi_1).change();
+                $("#prodi_2").val(response.data.prodi_2).change();
+                $("#modal-update").modal("show");
             },
             error: function (xhr, status, err) {
                 $.LoadingOverlay("hide")
@@ -158,6 +162,43 @@ $(document).ready(function () {
                 404: function() {
                     Swal.fire("Oops!", "Data tidak ditemukan", "error");
                 }
+            }
+        });
+    });
+
+    $("#form-update").submit(function (e) {
+        e.preventDefault();
+        var formData = new FormData($("#form-update")[0]);
+
+        $.ajax({
+            url: "/validasi/update",
+            type: "POST",
+            data : formData,
+            processData: false,
+            contentType: false,
+            beforeSend: function() {
+                $.LoadingOverlay("show");
+            },
+            success: function(response){
+                $.LoadingOverlay("hide");
+                $("#modal-update").modal('hide');
+                table.ajax.reload();
+                Swal.fire("Berhasil!", response.meta.message, "success");
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                $.LoadingOverlay("hide");
+                console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            },
+            statusCode: {
+                422: function() {
+                    Swal.fire("Error!", "Data yang dikirim tidak valid", "error");
+                },
+                409: function() {
+                    Swal.fire("Error!", "Data sudah terdaftar", "error");
+                },
+                500: function() {
+                    Swal.fire("Error!", "Terjadi Kesalahan di Server", "error");
+                },
             }
         });
     });
