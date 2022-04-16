@@ -24,6 +24,7 @@ Auth::routes([
 
 Route::get('/grafik', [App\Http\Controllers\GrafikController::class, 'index'])->name('grafik');
 Route::get('/rekap', [App\Http\Controllers\GrafikController::class, 'rekap'])->name('rekap');
+Route::get('/export', [App\Http\Controllers\GrafikController::class, 'export'])->name('export');
 
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

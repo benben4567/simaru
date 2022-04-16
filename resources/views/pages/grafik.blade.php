@@ -14,7 +14,7 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
         integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -41,7 +41,8 @@
         <!-- Fixed navbar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
             <a class="navbar-brand" href="#">Grafik PMB</a>
-            <!-- <button class="btn btn-info my-2 my-sm-0 ml-a uto" type="button" onclick="window.print()">Print</button> -->
+            <a class="btn btn-success my-2 my-sm-0 ml-auto" href="/export" role="button"><i class="fas fa-file-excel mr-1"></i>Download</a>
+            <!-- <button class="btn btn-info my-2 my-sm-0 ml-auto" type="button" onclick="window.print()">Print</button> -->
         </nav>
     </header>
 
