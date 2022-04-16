@@ -16,4 +16,9 @@ class Periode extends Model
     {
         return $this->hasMany(Maba::class);
     }
+
+    public function pendaftar()
+    {
+        return $this->hasMany(Pendaftar::class);
+    }
 }

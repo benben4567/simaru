@@ -22,6 +22,9 @@ Auth::routes([
   'verify' => false, // Email Verification Routes...
 ]);
 
+Route::get('/grafik', [App\Http\Controllers\GrafikController::class, 'index'])->name('grafik');
+Route::get('/rekap', [App\Http\Controllers\GrafikController::class, 'rekap'])->name('rekap');
+
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/chart', [App\Http\Controllers\HomeController::class, 'chart'])->name('chart');
@@ -83,5 +86,8 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('', [App\Http\Controllers\LogController::class, 'index'])->name('index');
     });
 
-
+    Route::group(['middleware' => ['permission:validasi'], 'prefix' => 'pendaftar', 'as' => 'pendaftar.'], function(){
+        Route::get('', [App\Http\Controllers\PendaftarController::class, 'index'])->name('index');
+        Route::post('', [App\Http\Controllers\PendaftarController::class, 'store'])->name('store');
+    });
 });

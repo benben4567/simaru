@@ -108,6 +108,17 @@
                 </li>
                 @endcan
 
+                @can('validasi')
+                <li class="nav-item">
+                    <a href="{{ route("pendaftar.index") }}" class="nav-link {{ set_active("pendaftar.*") }}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Pendaftar
+                        </p>
+                    </a>
+                </li>
+                @endcan
+
                 @can('manajemen')
                 <li class="nav-header">ADMINISTRATOR</li>
                 <li class="nav-item">
