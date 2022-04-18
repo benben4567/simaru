@@ -40,8 +40,8 @@ $(document).ready(function () {
                 data: "nama_perekom",
                 render: function (data, type, row, meta) {
                     var no = row.telp_perekom
-                    var concat = "62" + no
-                    return `${data}</br><a class="btn btn-success btn-xs mr-2" href="https://wa.me/${concat}" target="_blank" role="button" data-toggle="tooltip" title="Whatsapp"><i class="fab fa-whatsapp"></i></a>0${no}`
+                    var concat = "62" + no.substring(1)
+                    return `${data}</br><a class="btn btn-success btn-xs mr-2" href="https://wa.me/${concat}" target="_blank" role="button" data-toggle="tooltip" title="Whatsapp"><i class="fab fa-whatsapp"></i></a>${no}`
                 }
 
             },
