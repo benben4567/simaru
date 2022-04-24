@@ -66,6 +66,7 @@
                     </div>
                     <form method="post" id="form-input" autocomplete="off" enctype="multipart/form-data">
                         <div class="modal-body">
+                            <p>Download : <a href="{{ asset('storage/format-import-camaba.xlsx')}}" target="_blank">template_excel</a> </p>
                             <div class="form-group">
                                 <label for="exampleInputFile">File Excel</label>
                                 <div class="input-group">
