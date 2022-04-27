@@ -16,7 +16,7 @@ class LolosController extends Controller
     {
         if ($request->ajax()) {
             $periode = Periode::where('status', 'buka')->first();
-            $maba = Maba::select('no_pendaftaran', 'nama', 'prodi_lulus', 'tgl_lulus')->where('periode_id', $periode->id)->whereNotNull('prodi_lulus')->get();
+            $maba = Maba::select('no_pendaftaran', 'nama', 'telp', 'prodi_lulus', 'tgl_lulus')->where('periode_id', $periode->id)->whereNotNull('prodi_lulus')->get();
             return ResponseFormatter::success($maba, "Data User");
         }
 

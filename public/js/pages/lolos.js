@@ -55,7 +55,13 @@ $(document).ready(function () {
                 targets: 1,
                 data: "nama",
                 render: function (data, type, row, meta) {
-                    return `<a href="#" class="btn-update">${data}</a>`
+                    if (row.telp) {
+                        var no = row.telp
+                        var concat = "62" + no.substring(1)
+                        return `<a href="#" class="btn-update">${data}</a></br><a class="btn btn-success btn-xs mr-2" href="https://wa.me/${concat}" target="_blank" role="button" data-toggle="tooltip" title="Whatsapp"><i class="fab fa-whatsapp"></i></a>${no}`
+                    } else {
+                        return `<a href="#" class="btn-update">${data}</a></br> -`
+                    }
                 }
             },
             {
