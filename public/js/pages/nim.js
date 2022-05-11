@@ -2,6 +2,8 @@ $(document).ready(function () {
 
     var DateTime = luxon.DateTime;
 
+    // $.fn.dataTable.moment( 'dd-MM-yyyy' );
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -66,6 +68,7 @@ $(document).ready(function () {
                 className: "text-center",
                 width: "13%",
                 data: "tgl_nim",
+                type:"date-eu",
                 render: function (data, type, row, meta) {
                     if(data){
                         return DateTime.fromSQL(data).toFormat('dd-MM-yyyy');
