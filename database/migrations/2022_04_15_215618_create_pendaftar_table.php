@@ -24,6 +24,7 @@ class CreatePendaftarTable extends Migration
             $table->integer('gelombang')->nullable();
             $table->string('bayar_pendaftaran')->nullable();
             $table->string('jalur')->nullable();
+            $table->string('password')->nullable();
             $table->timestamps();
 
             $table->foreign('periode_id')->references('id')->on('periode');
