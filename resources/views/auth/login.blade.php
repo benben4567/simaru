@@ -4,6 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="Aplikasi Rekapitulasi PMB ITSK Soepraoen" name="description" />
+    <meta content="Benben" name="author" />
     <title>{{ config('app.name', 'Laravel') }} | Log in</title>
 
     <!-- Google Font: Source Sans Pro -->
