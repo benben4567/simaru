@@ -7,8 +7,10 @@ use App\Helpers\ResponseFormatter;
 use App\Models\Maba;
 use App\Models\Periode;
 use App\Models\Prodi;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Rap2hpoutre\FastExcel\FastExcel;
 
 class LolosController extends Controller
 {
@@ -110,6 +112,37 @@ class LolosController extends Controller
         } catch (\Exception $e) {
 
             Logger::error($maba, $e->getMessage());
+            return ResponseFormatter::error($e->getMessage(), 'Terjadi Kesalahan di Server');
+        }
+    }
+
+    public function import(Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'file' => 'file|required|mimes:xlsx'
+        ]);
+
+        if ($validator->fails()) {
+            return ResponseFormatter::error($validator->errors(), 'Inputan tidak valid', 422);
+        }
+
+        try {
+            // Uploadfile
+            $path = $request->file('file')->store('excel');
+
+            // Import
+            $collection = (new FastExcel)->sheet(1)->import(storage_path('app/'. $path), function($line) {
+                return Maba::where("no_pendaftaran", intval(trim($line['no_pendaftaran'])))->update([
+                    "prodi_lulus" => $line['prodi_lulus'],
+                    "nilai" => intval($line['nilai']),
+                    "tgl_pendaftaran" => Carbon::parse($line['tgl_pendaftaran'])->format('Y-m-d'),
+                    "tgl_lulus" => now()
+                ]);
+            });
+
+            return ResponseFormatter::success($collection, "Data Berhasil Diimport", 201);
+
+        } catch (\Exception $e) {
             return ResponseFormatter::error($e->getMessage(), 'Terjadi Kesalahan di Server');
         }
     }

@@ -42,6 +42,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('', [App\Http\Controllers\LolosController::class, 'index'])->name('index');
         Route::post('', [App\Http\Controllers\LolosController::class, 'store'])->name('store');
         Route::put('', [App\Http\Controllers\LolosController::class, 'update'])->name('update');
+        Route::post('/import', [App\Http\Controllers\LolosController::class, 'import'])->name('import');
         Route::get('/edit/{id}', [App\Http\Controllers\LolosController::class, 'edit'])->name('edit');
         Route::get('/maba/show/{id}', [App\Http\Controllers\LolosController::class, 'show'])->name('show');
     });

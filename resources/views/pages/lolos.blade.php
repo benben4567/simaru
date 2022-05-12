@@ -105,8 +105,8 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                                 <button type="submit" class="btn btn-primary">Simpan</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                             </div>
                         </form>
                     </div>
@@ -158,8 +158,40 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                                 <button type="submit" class="btn btn-primary">Simpan</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Import -->
+            <div class="modal fade" id="modal-import" tabindex="-1" role="dialog" aria-labelledby="modalImport" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Import Data Lolos Seleksi</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form method="post" id="form-import" autocomplete="off" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <p>Download : <a href="{{ asset('storage/format-import-lolos.xlsx')}}" target="_blank">template_excel</a> </p>
+                                <div class="form-group">
+                                    <label for="exampleInputFile">File Excel</label>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" name="file" id="exampleInputFile">
+                                            <label class="custom-file-label" for="exampleInputFile">Pilih</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Import</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                             </div>
                         </form>
                     </div>
@@ -182,6 +214,10 @@
 @endpush
 
 @push('js-lib')
+    <!-- bs-custom-file-input -->
+    <script src="{{asset("plugins/bs-custom-file-input/bs-custom-file-input.min.js")}}"></script>
+    <!-- MomentJS -->
+    <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
     <!-- Select2 -->
     <script src="{{ asset("plugins/select2/js/select2.full.min.js") }}"></script>
     <!-- InputMask -->
@@ -200,6 +236,7 @@
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-plugins/date-eu.js') }}"></script>
 @endpush
 
 @push('js')

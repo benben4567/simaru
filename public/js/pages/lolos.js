@@ -7,6 +7,8 @@ $(document).ready(function () {
         }
     });
 
+    bsCustomFileInput.init();
+
     Inputmask.extendDefaults({
         'removeMaskOnSubmit': true
     });
@@ -34,16 +36,28 @@ $(document).ready(function () {
         "searching": true,
         "autoWidth": false,
         "responsive": true,
-        "buttons": [{
-            text: '<i class="fas fa-plus mr-1"></i> Baru',
-            className: 'btn-outline-info',
-            action: function (e, dt, node, config) {
-                $("#modal-input").modal('show');
+        "buttons": [
+            {
+                text: '<i class="fas fa-plus mr-1"></i> Baru',
+                className: 'btn-outline-info',
+                action: function (e, dt, node, config) {
+                    $("#modal-input").modal('show');
+                },
+                init: function (api, node, config) {
+                    $(node).removeClass('btn-secondary')
+                }
             },
-            init: function (api, node, config) {
-                $(node).removeClass('btn-secondary')
-            }
-        }],
+            {
+                text: '<i class="fas fa-upload mr-1"></i> Import',
+                className: 'btn-outline-success',
+                action: function (e, dt, node, config) {
+                    $("#modal-import").modal('show');
+                },
+                init: function (api, node, config) {
+                    $(node).removeClass('btn-secondary')
+                }
+            },
+        ],
         "columnDefs": [
             {
                 targets: 0,
@@ -75,6 +89,7 @@ $(document).ready(function () {
                 width: "12%",
                 className: "text-center",
                 data: "tgl_lulus",
+                type:"date-eu",
                 render: function (data, type, row, meta) {
                     if(data){
                         return DateTime.fromSQL(data).toFormat('dd-MM-yyyy');
@@ -85,7 +100,7 @@ $(document).ready(function () {
             }
         ],
         "initComplete": function() {
-            table.buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+            table.buttons().container().removeClass("btn-group").appendTo('#example2_wrapper .col-md-6:eq(0)');
         }
     });
 
@@ -191,6 +206,42 @@ $(document).ready(function () {
                 $.LoadingOverlay("hide");
                 Swal.fire("Error!", xhr.statusText, "error");
                 console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+
+    $("#form-import").submit(function (e) {
+        e.preventDefault();
+        var formData = new FormData($("#form-import")[0]);
+        $.ajax({
+            url: "/lolos/import",
+            type: "POST",
+            data : formData,
+            processData: false,
+            contentType: false,
+            beforeSend: function() {
+                $.LoadingOverlay("show");
+            },
+            success: function(response){
+                $.LoadingOverlay("hide");
+                $("#modal-import").modal('hide');
+                table.ajax.reload();
+                Swal.fire("Berhasil!", response.meta.message, "success");
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                $.LoadingOverlay("hide");
+                console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            },
+            statusCode: {
+                422: function() {
+                    Swal.fire("Error!", "Data yang dikirim tidak valid", "error");
+                },
+                409: function() {
+                    Swal.fire("Error!", "Data sudah terdaftar", "error");
+                },
+                500: function() {
+                    Swal.fire("Error!", "Terjadi Kesalahan di Server", "error");
+                },
             }
         });
     });
