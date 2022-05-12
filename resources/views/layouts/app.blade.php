@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta content="Aplikasi Rekapitulasi PMB ITSK Soepraoen" name="description" />
+    <meta content="Benben" name="author" />
     <title>{{ config('app.name', 'Laravel') }} | Dashboard</title>
 
     <!-- Google Font: Source Sans Pro -->
