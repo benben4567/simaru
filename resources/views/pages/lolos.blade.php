@@ -178,7 +178,7 @@
                         </div>
                         <form method="post" id="form-import" autocomplete="off" enctype="multipart/form-data">
                             <div class="modal-body">
-                                <p>Download : <a href="{{ asset('storage/format-import-lolos.xlsx')}}" target="_blank">template_excel</a> </p>
+                                <p>Download Template: <a href="{{ asset('storage/format-import-lolos.xlsx')}}" target="_blank">format-import-lolos.xlsx</a> </p>
                                 <div class="form-group">
                                     <label for="exampleInputFile">File Excel</label>
                                     <div class="input-group">
