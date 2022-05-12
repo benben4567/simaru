@@ -42,7 +42,7 @@ class PendaftarController extends Controller
 
             // Import
             $periode = Periode::where('status', 'buka')->first();
-            $collection = (new FastExcel)->import(storage_path('app/'. $path), function($line) use($periode){
+            $collection = (new FastExcel)->sheet(1)->import(storage_path('app/'. $path), function($line) use($periode){
                 return $periode->pendaftar()->create([
                     'no_pendaftaran' => $line['no_pendaftaran'],
                     'nama' => $line['nama'],
@@ -51,10 +51,17 @@ class PendaftarController extends Controller
                     'gelombang' => $line['gelombang'],
                     'bayar_pendaftaran' => $line['bayar_pendaftaran'],
                     'jalur' => $line['jalur'],
+                    'password' => $line['password'],
                 ]);
             });
 
             return ResponseFormatter::success($collection, "Data Berhasil Diimport", 201);
+
+            // get last no_pendaftaran
+            // update current data by no_pendaftaran
+            // remove record from collection if no_pendaftaran <= last
+            // remove duplicate in collection // $unique = $collection->unique('nama');
+            // store unique row to database
 
         } catch (\Exception $e) {
             return ResponseFormatter::error($e->getMessage(), 'Terjadi Kesalahan di Server');
