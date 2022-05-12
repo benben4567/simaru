@@ -20,6 +20,18 @@ $(document).ready(function () {
         "searching": true,
         "autoWidth": false,
         "responsive": true,
+        "buttons": [
+            {
+                text: '<i class="fas fa-download mr-1"></i> Download',
+                className: 'btn-outline-warning',
+                action: function (e, dt, node, config) {
+                    window.location.href = '/rekomendasi/export/'+jenis.toLowerCase();
+                },
+                init: function (api, node, config) {
+                    $(node).removeClass('btn-secondary')
+                }
+            },
+        ],
         "order": [[1, "asc"]],
         "columnDefs": [
             {
@@ -79,7 +91,10 @@ $(document).ready(function () {
                     }
                 }
             }
-        ]
+        ],
+        "initComplete": function() {
+            table.buttons().container().removeClass("btn-group").appendTo('#example2_wrapper .col-md-6:eq(0)');
+        }
     });
 
     $("select[name='jenis']").val(null).change()

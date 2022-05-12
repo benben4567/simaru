@@ -9,6 +9,7 @@ use App\Models\Periode;
 use App\Models\Prodi;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Rap2hpoutre\FastExcel\FastExcel;
 
@@ -145,5 +146,18 @@ class LolosController extends Controller
         } catch (\Exception $e) {
             return ResponseFormatter::error($e->getMessage(), 'Terjadi Kesalahan di Server');
         }
+    }
+
+    public function export()
+    {
+        $data = DB::table('maba')->select('no_pendaftaran', 'nama', 'prodi_lulus', 'jalur_pendaftaran', 'gelombang', 'tgl_lulus')
+                        ->whereNotNull('prodi_lulus')
+                        ->orderBy('prodi_lulus')
+                        ->orderBy('no_pendaftaran')
+                        ->get();
+
+        $filename = 'simaru_lolos_'.date('dmY').".xlsx";
+
+        return (new FastExcel($data))->download($filename);
     }
 }

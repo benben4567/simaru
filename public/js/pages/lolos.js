@@ -57,6 +57,16 @@ $(document).ready(function () {
                     $(node).removeClass('btn-secondary')
                 }
             },
+            {
+                text: '<i class="fas fa-download mr-1"></i> Download',
+                className: 'btn-outline-warning',
+                action: function (e, dt, node, config) {
+                    window.location.href = '/lolos/export';
+                },
+                init: function (api, node, config) {
+                    $(node).removeClass('btn-secondary')
+                }
+            },
         ],
         "columnDefs": [
             {

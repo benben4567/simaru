@@ -7,7 +7,9 @@ use App\Helpers\ResponseFormatter;
 use App\Models\Maba;
 use App\Models\Periode;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Rap2hpoutre\FastExcel\FastExcel;
 
 class PembayaranController extends Controller
 {
@@ -47,5 +49,18 @@ class PembayaranController extends Controller
             Logger::error($maba, $e->getMessage());
             return ResponseFormatter::error($e->getMessage(), 'Terjadi Kesalahan di Server');
         }
+    }
+
+    public function export()
+    {
+        $data = DB::table('maba')->select('no_pendaftaran', 'nim', 'nama', 'prodi_lulus', 'gelombang', 'pembayaran', 'jalur_pendaftaran', 'tgl_pembayaran')
+                        ->whereNotNull('pembayaran')
+                        ->orderBy('prodi_lulus')
+                        ->orderBy('no_pendaftaran')
+                        ->get();
+
+        $filename = 'simaru_pembayaran_'.date('dmY').".xlsx";
+
+        return (new FastExcel($data))->download($filename);
     }
 }

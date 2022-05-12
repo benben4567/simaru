@@ -7,7 +7,9 @@ use App\Helpers\ResponseFormatter;
 use App\Models\Maba;
 use App\Models\Periode;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Rap2hpoutre\FastExcel\FastExcel;
 
 class RekomendasiController extends Controller
 {
@@ -73,5 +75,20 @@ class RekomendasiController extends Controller
             Logger::error($maba, $e->getMessage());
             return ResponseFormatter::error($e->getMessage(), 'Terjadi Kesalahan di Server');
         }
+    }
+
+    public function export($jenis)
+    {
+        $data = DB::table('maba')->select('no_pendaftaran', 'nama', 'prodi_lulus', 'nama_perekom', 'telp_perekom', 'tgl_pengajuan', 'tgl_pencairan')
+                        ->whereNotNull('pembayaran')
+                        ->where('rekomendasi', $jenis)
+                        ->orderBy('tgl_pencairan')
+                        ->orderBy('tgl_pengajuan')
+                        ->orderBy('nama')
+                        ->get();
+
+        $filename = 'simaru_rekom_'.$jenis.'_'.date('dmY').".xlsx";
+
+        return (new FastExcel($data))->download($filename);
     }
 }

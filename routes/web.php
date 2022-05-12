@@ -43,6 +43,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::post('', [App\Http\Controllers\LolosController::class, 'store'])->name('store');
         Route::put('', [App\Http\Controllers\LolosController::class, 'update'])->name('update');
         Route::post('/import', [App\Http\Controllers\LolosController::class, 'import'])->name('import');
+        Route::get('/export', [App\Http\Controllers\LolosController::class, 'export'])->name('export');
         Route::get('/edit/{id}', [App\Http\Controllers\LolosController::class, 'edit'])->name('edit');
         Route::get('/maba/show/{id}', [App\Http\Controllers\LolosController::class, 'show'])->name('show');
     });
@@ -50,12 +51,14 @@ Route::group(['middleware' => 'auth'], function(){
     Route::group(['middleware' => ['permission:pembayaran'], 'prefix' => 'pembayaran', 'as' => 'pembayaran.'], function(){
         Route::get('', [App\Http\Controllers\PembayaranController::class, 'index'])->name('index');
         Route::post('', [App\Http\Controllers\PembayaranController::class, 'store'])->name('store');
+        Route::get('/export', [App\Http\Controllers\PembayaranController::class, 'export'])->name('export');
     });
 
     Route::group(['prefix' => 'rekomendasi', 'as' => 'rekomendasi.'], function(){
         Route::post('', [App\Http\Controllers\RekomendasiController::class, 'store'])->name('store');
         Route::get('/internal', [App\Http\Controllers\RekomendasiController::class, 'internal'])->name('internal')->middleware('permission:rekom-internal');
         Route::get('/eksternal', [App\Http\Controllers\RekomendasiController::class, 'eksternal'])->name('eksternal')->middleware('permission:rekom-eksternal');
+        Route::get('/export/{jenis}', [App\Http\Controllers\RekomendasiController::class, 'export'])->name('export')->middleware('permission:rekom-internal|rekom-eksternal');
     });
 
     Route::group(['middleware' => ['permission:nim'], 'prefix' => 'nim', 'as' => 'nim.'], function(){
