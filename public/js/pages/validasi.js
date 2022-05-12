@@ -81,6 +81,7 @@ $(document).ready(function () {
                 targets: 5,
                 className: "text-center",
                 width: "15%",
+                type:"date-eu",
                 data: "tgl_validasi",
                 render: function (data, type, row, meta) {
                     if(data){

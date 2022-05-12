@@ -53,6 +53,7 @@ $(document).ready(function () {
                 targets: 4,
                 className: "text-center",
                 width: "12%",
+                type:"date-eu",
                 data: "tgl_pembayaran",
                 render: function (data, type, row, meta) {
                     if(data){
