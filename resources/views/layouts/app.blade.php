@@ -5,9 +5,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta content="Aplikasi Rekapitulasi PMB ITSK Soepraoen" name="description" />
     <meta content="Benben" name="author" />
+
+    <!-- Primary Meta Tags -->
     <title>{{ config('app.name', 'Laravel') }} | Dashboard</title>
+    <meta name="title" content="SIMARU — Sistem Manajemen Pendaftaran Mahasiswa Baru">
+    <meta name="description" content="Aplikasi untuk manajemen dan rekapitulasi dalam penerimaan mahasiswa baru di ITSK RS dr. Soepraoen">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://simaru.itsk-soepraoen.ac.id">
+    <meta property="og:title" content="SIMARU — Sistem Manajemen Pendaftaran Mahasiswa Baru">
+    <meta property="og:description" content="Aplikasi untuk manajemen dan rekapitulasi dalam penerimaan mahasiswa baru di ITSK RS dr. Soepraoen">
+    <meta property="og:image" content="https://simaru.itsk-soepraoen.ac.id/img/itsk.png">
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
