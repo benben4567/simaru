@@ -20,3 +20,4 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/validasi', [ValidasiController::class, 'index']);
+Route::get('/validasi/show/{id}', [ValidasiController::class, 'show']);

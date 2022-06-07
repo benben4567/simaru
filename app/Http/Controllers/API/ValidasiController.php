@@ -25,4 +25,15 @@ class ValidasiController extends Controller
 
         return ResponseFormatter::success($data, 'Data Validasi');
     }
+
+    public function show($id)
+    {
+        $maba = Maba::where('no_pendaftaran', $id)->first();
+
+        if ($maba) {
+            return ResponseFormatter::success($maba, 'Data Pendaftar ditemukan');
+        } else {
+            return ResponseFormatter::error(null, 'Data Pendaftarn tidak ditemukan', 404);
+        }
+    }
 }
