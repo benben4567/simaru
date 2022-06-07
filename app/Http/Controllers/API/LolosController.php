@@ -10,8 +10,9 @@ use Illuminate\Http\Request;
 
 class LolosController extends Controller
 {
-    public function index($prodi)
+    public function index(Request $request)
     {
+        $prodi = $request->prodi;
         $periode = Periode::where('status', 'buka')->first();
         if ($prodi) {
             $maba = Maba::select('no_pendaftaran', 'nama')

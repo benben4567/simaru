@@ -23,4 +23,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/validasi', [ValidasiController::class, 'index']);
 Route::get('/validasi/show/{id}', [ValidasiController::class, 'show']);
 
-Route::get('/lolos/{prodi?}', [LolosController::class, 'show']);
+Route::get('/lolos', [LolosController::class, 'show']);
