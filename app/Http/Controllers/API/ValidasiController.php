@@ -36,4 +36,39 @@ class ValidasiController extends Controller
             return ResponseFormatter::error(null, 'Data Pendaftarn tidak ditemukan', 404);
         }
     }
+
+    public function query(Request $request)
+    {
+        $substr = substr($request->input('query'), 1);
+
+        $periode = Periode::where('status', 'buka')->first();
+
+        if ($substr == '9') {
+            $no = (int) $request->input('query');
+            $maba = Maba::select('no_pendaftaran', 'nama', 'gelombang')
+                ->where('periode_id', $periode->id)
+                ->where('no_pendaftaran', $no)
+                ->orderBy('no_pendaftaran')
+                ->get();
+
+            if ($maba) {
+                return ResponseFormatter::success($maba, 'Data ditemukan');
+            } else {
+                return ResponseFormatter::error(null, 'Data tidak ditemukan', 404);
+            }
+        } else {
+            $keyword = $request->input('query');
+            $maba = Maba::select('no_pendaftaran', 'nama', 'gelombang')
+                ->where('periode_id', $periode->id)
+                ->where('name', 'like', "%{$keyword}%")
+                ->orderBy('no_pendaftaran')
+                ->get();
+
+            if ($maba) {
+                return ResponseFormatter::success($maba, 'Data ditemukan');
+            } else {
+                return ResponseFormatter::error(null, 'Data tidak ditemukan', 404);
+            }
+        }
+    }
 }
