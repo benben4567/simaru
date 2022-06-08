@@ -60,7 +60,7 @@ class ValidasiController extends Controller
             $keyword = $request->input('query');
             $maba = Maba::select('no_pendaftaran', 'nama', 'gelombang')
                 ->where('periode_id', $periode->id)
-                ->where('name', 'like', "%{$keyword}%")
+                ->where('nama', 'LIKE', "%{$keyword}%")
                 ->orderBy('no_pendaftaran')
                 ->get();
 
