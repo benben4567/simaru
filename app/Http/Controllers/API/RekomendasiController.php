@@ -55,29 +55,26 @@ class RekomendasiController extends Controller
         if ($status == 'Selesai') {
             $maba = Maba::select('no_pendaftaran', 'nama')
                 ->where('periode_id', $periode->id)
-                ->whereNotNull('prodi_lulus')
+                ->where('rekomendasi', 'eksternal')
                 ->whereNotNull('pembayaran')
                 ->whereNotNull('tgl_pencairan')
-                ->where('rekomendasi', 'eksternal')
                 ->orderBy('nama', 'ASC')
                 ->get();
         } elseif ($status == 'Proses') {
             $maba = Maba::select('no_pendaftaran', 'nama')
                 ->where('periode_id', $periode->id)
-                ->whereNotNull('prodi_lulus')
+                ->where('rekomendasi', 'eksternal')
                 ->whereNotNull('pembayaran')
                 ->whereNotNull('tgl_pengajuan')
                 ->whereNull('tgl_pencairan')
-                ->where('rekomendasi', 'eksternal')
                 ->orderBy('nama', 'ASC')
                 ->get();
         } else {
             $maba = Maba::select('no_pendaftaran', 'nama')
                 ->where('periode_id', $periode->id)
-                ->whereNotNull('prodi_lulus')
+                ->where('rekomendasi', 'eksternal')
                 ->whereNotNull('pembayaran')
                 ->whereNull('tgl_pengajuan')
-                ->where('rekomendasi', 'eksternal')
                 ->orderBy('nama', 'ASC')
                 ->get();
         }
