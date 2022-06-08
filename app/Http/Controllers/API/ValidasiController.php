@@ -39,7 +39,7 @@ class ValidasiController extends Controller
 
     public function search(Request $request)
     {
-        $substr = substr($request->input('query'), 1);
+        $substr = substr($request->input('query'), 0, 1);
         dd($substr);
         $periode = Periode::where('status', 'buka')->first();
 
