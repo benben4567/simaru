@@ -37,7 +37,7 @@ class ValidasiController extends Controller
         }
     }
 
-    public function query(Request $request)
+    public function search(Request $request)
     {
         $substr = substr($request->input('query'), 1);
 
