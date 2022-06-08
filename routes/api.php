@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\LolosController;
+use App\Http\Controllers\API\NimController;
 use App\Http\Controllers\API\PembayaranController;
 use App\Http\Controllers\API\RekomendasiController;
 use App\Http\Controllers\API\ValidasiController;
@@ -31,3 +32,5 @@ Route::get('/pembayaran', [PembayaranController::class, 'index']);
 
 Route::get('/rekom-internal', [RekomendasiController::class, 'internal']);
 Route::get('/rekom-eksternal', [RekomendasiController::class, 'eksternal']);
+
+Route::get('/nim', [NimController::class, 'index']);
