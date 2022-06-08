@@ -18,10 +18,9 @@ class RekomendasiController extends Controller
         if ($status == 'Selesai') {
             $maba = Maba::select('no_pendaftaran', 'nama')
                 ->where('periode_id', $periode->id)
-                ->whereNotNull('prodi_lulus')
-                ->whereNotNull('pembayaran')
-                ->whereNotNull('tgl_pencairan')
                 ->where('rekomendasi', 'internal')
+                ->whereNotNull('tgl_pembayaran')
+                ->whereNotNull('tgl_pencairan')
                 ->orderBy('nama', 'ASC')
                 ->get();
         } elseif ($status == 'Proses') {
@@ -36,10 +35,9 @@ class RekomendasiController extends Controller
         } else {
             $maba = Maba::select('no_pendaftaran', 'nama')
                 ->where('periode_id', $periode->id)
-                ->whereNotNull('prodi_lulus')
+                ->where('rekomendasi', 'internal')
                 ->whereNotNull('pembayaran')
                 ->whereNull('tgl_pengajuan')
-                ->where('rekomendasi', 'internal')
                 ->orderBy('nama', 'ASC')
                 ->get();
         }
@@ -56,7 +54,7 @@ class RekomendasiController extends Controller
             $maba = Maba::select('no_pendaftaran', 'nama')
                 ->where('periode_id', $periode->id)
                 ->where('rekomendasi', 'eksternal')
-                ->whereNotNull('pembayaran')
+                ->whereNotNull('tgl_pembayaran')
                 ->whereNotNull('tgl_pencairan')
                 ->orderBy('nama', 'ASC')
                 ->get();
@@ -64,9 +62,9 @@ class RekomendasiController extends Controller
             $maba = Maba::select('no_pendaftaran', 'nama')
                 ->where('periode_id', $periode->id)
                 ->where('rekomendasi', 'eksternal')
-                ->whereNotNull('pembayaran')
-                ->whereNull('tgl_pencairan')
+                ->whereNotNull('tgl_pembayaran')
                 ->whereNotNull('tgl_pengajuan')
+                ->whereNull('tgl_pencairan')
                 ->orderBy('nama', 'ASC')
                 ->get();
         } else {
