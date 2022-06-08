@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\LolosController;
+use App\Http\Controllers\API\PembayaranController;
 use App\Http\Controllers\API\ValidasiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,3 +25,5 @@ Route::get('/validasi', [ValidasiController::class, 'index']);
 Route::get('/validasi/show/{id}', [ValidasiController::class, 'show']);
 
 Route::get('/lolos', [LolosController::class, 'index']);
+
+Route::get('/pembayaran', [PembayaranController::class, 'index']);
