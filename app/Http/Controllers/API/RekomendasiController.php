@@ -30,7 +30,7 @@ class RekomendasiController extends Controller
                 ->where('rekomendasi', 'internal')
                 ->whereNotNull('tgl_pembayaran')
                 ->whereNotNull('tgl_pengajuan')
-                ->whereNotNull('tgl_pencairan')
+                ->whereNull('tgl_pencairan')
                 ->orderBy('nama', 'ASC')
                 ->get();
         } else {
