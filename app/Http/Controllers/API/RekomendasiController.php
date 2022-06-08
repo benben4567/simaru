@@ -19,7 +19,6 @@ class RekomendasiController extends Controller
             $maba = Maba::select('no_pendaftaran', 'nama')
                 ->where('periode_id', $periode->id)
                 ->where('rekomendasi', 'internal')
-                ->whereNotNull('tgl_pembayaran')
                 ->whereNotNull('tgl_pencairan')
                 ->orderBy('nama', 'ASC')
                 ->get();
@@ -54,7 +53,6 @@ class RekomendasiController extends Controller
             $maba = Maba::select('no_pendaftaran', 'nama')
                 ->where('periode_id', $periode->id)
                 ->where('rekomendasi', 'eksternal')
-                ->whereNotNull('tgl_pembayaran')
                 ->whereNotNull('tgl_pencairan')
                 ->orderBy('nama', 'ASC')
                 ->get();
