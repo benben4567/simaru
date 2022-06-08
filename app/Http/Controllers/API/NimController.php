@@ -20,7 +20,7 @@ class NimController extends Controller
                 ->where('periode_id', $periode->id)
                 ->where('pembayaran', 'lunas')
                 ->where('gelombang', $i)
-                ->orderBy('no_pendaftaran')
+                ->orderBy('nim', 'ASC')
                 ->get();
             $data['gelombang_' . $i] = $maba;
         }
