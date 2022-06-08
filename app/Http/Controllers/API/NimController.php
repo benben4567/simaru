@@ -16,7 +16,7 @@ class NimController extends Controller
 
         $data = [];
         for ($i = 1; $i <= 4; $i++) {
-            $maba = Maba::select('no_pendaftaran', 'nama', 'gelombang')
+            $maba = Maba::select('no_pendaftaran', 'nama', 'gelombang', 'nim')
                 ->where('periode_id', $periode->id)
                 ->where('pembayaran', 'lunas')
                 ->where('gelombang', $i)
