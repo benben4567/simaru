@@ -25,7 +25,7 @@ class CreateMabaTable extends Migration
             $table->string('telp')->nullable();
             $table->string('prodi_lulus')->nullable();
             $table->string('pembayaran')->nullable();
-            $table->integer('nim')->nullable();
+            $table->string('nim')->nullable();
             $table->string('jalur_pendaftaran')->nullable();
             $table->integer('gelombang')->nullable();
             $table->string('rekomendasi')->nullable();
