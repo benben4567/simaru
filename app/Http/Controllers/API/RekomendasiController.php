@@ -67,6 +67,7 @@ class RekomendasiController extends Controller
                 ->whereNotNull('prodi_lulus')
                 ->whereNotNull('pembayaran')
                 ->whereNotNull('tgl_pengajuan')
+                ->whereNull('tgl_pencairan')
                 ->where('rekomendasi', 'eksternal')
                 ->orderBy('nama', 'ASC')
                 ->get();
