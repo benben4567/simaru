@@ -27,10 +27,10 @@ class RekomendasiController extends Controller
         } elseif ($status == 'Proses') {
             $maba = Maba::select('no_pendaftaran', 'nama')
                 ->where('periode_id', $periode->id)
-                ->whereNotNull('prodi_lulus')
-                ->whereNotNull('pembayaran')
-                ->whereNotNull('tgl_pengajuan')
                 ->where('rekomendasi', 'internal')
+                ->whereNotNull('tgl_pembayaran')
+                ->whereNotNull('tgl_pengajuan')
+                ->whereNotNull('tgl_pencairan')
                 ->orderBy('nama', 'ASC')
                 ->get();
         } else {
