@@ -56,15 +56,49 @@ class GrafikController extends Controller
             ->groupBy('prodi_2')
             ->get()->toArray();
 
+        $pendaftaran = [];
+        foreach ($bayar_pendaftaran as $byr) {
+            $pendaftaran[$byr->bayar_pendaftaran] = $byr->jumlah;
+        }
+
+        $ukt = [];
+        foreach ($bayar_ukt as $byr) {
+            ($byr->pembayaran == null ? $ukt['belum'] = $byr->jumlah : $ukt[$byr->pembayaran] = $byr->jumlah);
+        }
+
+        $gel = [];
+        foreach ($gelombang as $g) {
+            $gel[$g->gelombang] = $g->jumlah;
+        }
+
+        $jalur = [];
+        foreach ($jalur_pendaftaran as $j) {
+            $jalur[$j->jalur] = $j->jumlah;
+        }
+
+        $lulus = [];
+        foreach ($prodi_lulus as $l) {
+            $lulus[$l->prodi_lulus] = $l->jumlah;
+        }
+
+        $prodi1 = [];
+        foreach ($prodi_1 as $p) {
+            $prodi1[$p->prodi_1] = $p->jumlah;
+        }
+
+        $prodi2 = [];
+        foreach ($prodi_2 as $p) {
+            $prodi2[$p->prodi_2] = $p->jumlah;
+        }
 
         $data = [
-            'pendaftaran' => $bayar_pendaftaran,
-            'ukt' => $bayar_ukt,
-            'gelombang' => $gelombang,
-            'jalur_pendaftaran' => $jalur_pendaftaran,
-            'lulus' => $prodi_lulus,
-            'prodi1' => $prodi_1,
-            'prodi2' => $prodi_2,
+            'pendaftaran' => $pendaftaran,
+            'ukt' => $ukt,
+            'gelombang' => $gel,
+            'jalur_pendaftaran' => $jalur,
+            'lulus' => $lulus,
+            'prodi1' => $prodi1,
+            'prodi2' => $prodi2,
         ];
 
         return ResponseFormatter::success($data, 'Data grafik');
