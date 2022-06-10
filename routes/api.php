@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\GrafikController;
 use App\Http\Controllers\API\LolosController;
 use App\Http\Controllers\API\NimController;
 use App\Http\Controllers\API\PembayaranController;
@@ -35,3 +36,5 @@ Route::get('/rekom-internal', [RekomendasiController::class, 'internal']);
 Route::get('/rekom-eksternal', [RekomendasiController::class, 'eksternal']);
 
 Route::get('/nim', [NimController::class, 'index']);
+
+Route::get('/grafik', [GrafikController::class, 'rekap']);
