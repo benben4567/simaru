@@ -68,7 +68,7 @@ class GrafikController extends Controller
 
         $gel = [];
         foreach ($gelombang as $g) {
-            $gel[$g->gelombang] = $g->jumlah;
+            $gel['gel' . $g->gelombang] = $g->jumlah;
         }
 
         $jalur = [];
