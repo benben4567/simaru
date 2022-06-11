@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\GrafikController;
+use App\Http\Controllers\API\LoginController;
 use App\Http\Controllers\API\LolosController;
 use App\Http\Controllers\API\NimController;
 use App\Http\Controllers\API\PembayaranController;
@@ -23,18 +24,22 @@ use Illuminate\Support\Facades\Route;
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+Route::post('/login', [LoginController::class, 'index']);
 
-Route::get('/validasi', [ValidasiController::class, 'index']);
-Route::get('/validasi/search', [ValidasiController::class, 'search']);
-Route::get('/validasi/show/{id}', [ValidasiController::class, 'show']);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/validasi', [ValidasiController::class, 'index']);
+    Route::get('/validasi/search', [ValidasiController::class, 'search']);
+    Route::get('/validasi/show/{id}', [ValidasiController::class, 'show']);
 
-Route::get('/lolos', [LolosController::class, 'index']);
+    Route::get('/lolos', [LolosController::class, 'index']);
 
-Route::get('/pembayaran', [PembayaranController::class, 'index']);
+    Route::get('/pembayaran', [PembayaranController::class, 'index']);
 
-Route::get('/rekom-internal', [RekomendasiController::class, 'internal']);
-Route::get('/rekom-eksternal', [RekomendasiController::class, 'eksternal']);
+    Route::get('/rekom-internal', [RekomendasiController::class, 'internal']);
+    Route::get('/rekom-eksternal', [RekomendasiController::class, 'eksternal']);
 
-Route::get('/nim', [NimController::class, 'index']);
+    Route::get('/nim', [NimController::class, 'index']);
 
-Route::get('/grafik', [GrafikController::class, 'rekap']);
+    Route::get('/grafik', [GrafikController::class, 'rekap']);
+    Route::get('/logout', [LoginController::class, 'logout']);
+});
