@@ -29,6 +29,7 @@ Route::post('/login', [LoginController::class, 'index']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/profile', [HomeController::class, 'profile']);
+    Route::post('/password', [HomeController::class, 'password']);
 
     Route::get('/validasi', [ValidasiController::class, 'index']);
     Route::get('/validasi/search', [ValidasiController::class, 'search']);
