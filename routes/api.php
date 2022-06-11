@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\GrafikController;
+use App\Http\Controllers\API\HomeController;
 use App\Http\Controllers\API\LoginController;
 use App\Http\Controllers\API\LolosController;
 use App\Http\Controllers\API\NimController;
@@ -27,6 +28,8 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [LoginController::class, 'index']);
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/profile', [HomeController::class, 'profile']);
+
     Route::get('/validasi', [ValidasiController::class, 'index']);
     Route::get('/validasi/search', [ValidasiController::class, 'search']);
     Route::get('/validasi/show/{id}', [ValidasiController::class, 'show']);
