@@ -46,7 +46,7 @@ class LoginController extends Controller
      */
     public function logout()
     {
-        auth()->logout();
+        auth()->user()->tokens()->delete();
         return ResponseFormatter::success(null, "Logged out");
     }
 }
