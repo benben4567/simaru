@@ -6,7 +6,9 @@ use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\Maba;
 use App\Models\Periode;
+use App\Models\Prodi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class LolosController extends Controller
 {
@@ -28,5 +30,39 @@ class LolosController extends Controller
         }
 
         return ResponseFormatter::success($maba, 'Data pendaftar lolos seleksi');
+    }
+
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            "no" => 'required',
+            "prodi_lolos" => 'required',
+            "nilai" => 'nullable',
+            "tgl_daftar" => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return ResponseFormatter::error($validator->errors(), "Data tidak valid", 422);
+        }
+
+        try {
+
+            $prodi_lolos = Prodi::where('kode', $request->input('prodi_lolos'))->first();
+
+            $maba = Maba::where("no_pendaftaran", $request->no)->first();
+            $maba->update([
+                "prodi_lulus" => $prodi_lolos->name,
+                "nilai" => $request->nilai,
+                "tgl_pendaftaran" => $request->tgl_daftar,
+                "tgl_lulus" => now()
+            ]);
+
+            // Logger::info($maba, 'updated to lolos');
+
+            return ResponseFormatter::success($maba, "Data Berhasil Disimpan", 201);
+        } catch (\Exception $e) {
+            Logger::error($maba, $e->getMessage());
+            return ResponseFormatter::error($e->getMessage(), 'Terjadi Kesalahan di Server');
+        }
     }
 }

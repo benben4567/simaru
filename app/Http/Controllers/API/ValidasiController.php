@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Helpers\Logger;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\Maba;
 use App\Models\Periode;
+use App\Models\Prodi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ValidasiController extends Controller
 {
@@ -69,6 +72,69 @@ class ValidasiController extends Controller
             } else {
                 return ResponseFormatter::error(null, 'Data tidak ditemukan', 404);
             }
+        }
+    }
+
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            "no" => 'required',
+            "nama" => 'required',
+            "nohp" => 'required',
+            "prodi_1" => 'required',
+            "prodi_2" => 'required',
+            "jalur" => 'required',
+            "gelombang" => 'required',
+            "rekomendasi" => 'nullable',
+            "nama_perekom" => 'nullable',
+            "nohp_perekom" => 'nullable',
+        ]);
+
+        if ($validator->fails()) {
+            return ResponseFormatter::error($validator->errors(), "Data tidak valid", 422);
+        }
+
+        try {
+            $periode = Periode::where('status', 'buka')->first();
+
+            $prodi_1 = Prodi::where('kode', $request->input('prodi_1'))->first();
+            $prodi_2 = Prodi::where('kode', $request->input('prodi_2'))->first();
+
+            switch ($request->input('jalur')) {
+                case 'UMUM':
+                    $jalur = 'REGULER';
+                    break;
+                case 'R2/KARYAWAN':
+                    $jalur = 'REGSUS';
+                    break;
+                default:
+                    $jalur = $request->input('jalur');
+                    break;
+            }
+
+            // update or create
+            $maba = $periode->maba()->updateOrCreate(
+                ['no_pendaftaran' => $request->input('no')],
+                [
+                    'nama' => strtoupper($request->input('nama')),
+                    'telp' => $request->input('nohp'),
+                    'prodi_1' => $prodi_1->name,
+                    'prodi_2' => $prodi_2->name,
+                    'jalur_pendaftaran' => $jalur,
+                    'gelombang' => $request->input('gelombang'),
+                    'rekomendasi' => $request->input('rekomendasi'),
+                    'nama_perekom' => $request->input('nama_perekom'),
+                    'telp_perekom' => $request->input('nohp_perekom'),
+                    "tgl_validasi" => now()
+                ]
+            );
+
+            // Logger::info($maba, 'created automatically from Siakad');
+
+            return ResponseFormatter::success($maba, "Data Berhasil Disimpan", 201);
+        } catch (\Exception $e) {
+            Logger::error($maba, $e->getMessage());
+            return ResponseFormatter::error($e->getMessage(), 'Terjadi Kesalahan di Server');
         }
     }
 }
