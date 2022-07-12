@@ -26,6 +26,11 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 Route::post('/login', [LoginController::class, 'index']);
+Route::post('/validasi', [ValidasiController::class, 'store']);
+Route::post('/lolos', [LolosController::class, 'store']);
+Route::post('/pembayaran', [PembayaranController::class, 'store']);
+Route::post('/nim', [NimController::class, 'store']);
+
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/profile', [HomeController::class, 'profile']);
