@@ -58,7 +58,7 @@ class GrafikController extends Controller
 
         $pendaftaran = [];
         foreach ($bayar_pendaftaran as $byr) {
-            if ($byr->bayar_pendaftaran == "Sudah Bayar") {
+            if ($byr->bayar_pendaftaran == "sudah") {
                 $pendaftaran['sudah'] = $byr->jumlah;
             } else {
                 $pendaftaran['belum'] = $byr->jumlah;
