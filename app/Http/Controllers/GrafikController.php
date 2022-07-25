@@ -14,49 +14,53 @@ class GrafikController extends Controller
 {
     public function index()
     {
+        return abort(404);
+
         $periode = Periode::where('status', 'buka')->first()->value('tahun');
         return view('pages.grafik', compact('periode'));
     }
 
     public function rekap()
     {
+        return abort(404);
+
         $periode = Periode::where('status', 'buka')->first()->id;
         $bayar_pendaftaran = DB::table('pendaftar')->select('bayar_pendaftaran', DB::raw('COUNT(*) as jumlah'))
-                        ->where('periode_id', $periode)
-                        ->groupBy('bayar_pendaftaran')
-                        ->get()->toArray();
+            ->where('periode_id', $periode)
+            ->groupBy('bayar_pendaftaran')
+            ->get()->toArray();
 
         $bayar_ukt = DB::table('maba')->select('pembayaran', DB::raw('COUNT(*) as jumlah'))
-                        ->where('periode_id', $periode)
-                        ->whereNotNull('prodi_lulus')
-                        ->groupBy('pembayaran')
-                        ->get()->toArray();
+            ->where('periode_id', $periode)
+            ->whereNotNull('prodi_lulus')
+            ->groupBy('pembayaran')
+            ->get()->toArray();
 
         $gelombang = DB::table('pendaftar')->select('gelombang', DB::raw('COUNT(*) as jumlah'))
-                        ->where('periode_id', $periode)
-                        ->groupBy('gelombang')
-                        ->get()->toArray();
+            ->where('periode_id', $periode)
+            ->groupBy('gelombang')
+            ->get()->toArray();
 
         $jalur_pendaftaran = DB::table('pendaftar')->select('jalur', DB::raw('COUNT(*) as jumlah'))
-                        ->where('periode_id', $periode)
-                        ->groupBy('jalur')
-                        ->get()->toArray();
+            ->where('periode_id', $periode)
+            ->groupBy('jalur')
+            ->get()->toArray();
 
         $prodi_lulus = DB::table('maba')->select('prodi_lulus', DB::raw('COUNT(*) as jumlah'))
-                        ->where('periode_id', $periode)
-                        ->where('prodi_lulus', "!=", null)
-                        ->groupBy('prodi_lulus')
-                        ->get()->toArray();
+            ->where('periode_id', $periode)
+            ->where('prodi_lulus', "!=", null)
+            ->groupBy('prodi_lulus')
+            ->get()->toArray();
 
         $prodi_1 = DB::table('pendaftar')->select('prodi_1', DB::raw('COUNT(*) as jumlah'))
-                        ->where('periode_id', $periode)
-                        ->groupBy('prodi_1')
-                        ->get()->toArray();
+            ->where('periode_id', $periode)
+            ->groupBy('prodi_1')
+            ->get()->toArray();
 
         $prodi_2 = DB::table('pendaftar')->select('prodi_2', DB::raw('COUNT(*) as jumlah'))
-                        ->where('periode_id', $periode)
-                        ->groupBy('prodi_2')
-                        ->get()->toArray();
+            ->where('periode_id', $periode)
+            ->groupBy('prodi_2')
+            ->get()->toArray();
 
         $pendaftaran = Arr::pluck($bayar_pendaftaran, 'jumlah'); //belum, sudah
         $ukt = Arr::pluck($bayar_ukt, 'jumlah'); //null, lunas, setengah
@@ -89,43 +93,45 @@ class GrafikController extends Controller
 
     public function export()
     {
+        return abort(404);
+
         $periode = Periode::where('status', 'buka')->first()->id;
         $bayar_pendaftaran = DB::table('pendaftar')->select('bayar_pendaftaran', DB::raw('COUNT(*) as jumlah'))
-                        ->where('periode_id', $periode)
-                        ->groupBy('bayar_pendaftaran')
-                        ->get()->toArray();
+            ->where('periode_id', $periode)
+            ->groupBy('bayar_pendaftaran')
+            ->get()->toArray();
 
         $bayar_ukt = DB::table('maba')->select('pembayaran', DB::raw('COUNT(*) as jumlah'))
-                        ->where('periode_id', $periode)
-                        ->whereNotNull('prodi_lulus')
-                        ->groupBy('pembayaran')
-                        ->get()->toArray();
+            ->where('periode_id', $periode)
+            ->whereNotNull('prodi_lulus')
+            ->groupBy('pembayaran')
+            ->get()->toArray();
 
         $gelombang = DB::table('pendaftar')->select('gelombang', DB::raw('COUNT(*) as jumlah'))
-                        ->where('periode_id', $periode)
-                        ->groupBy('gelombang')
-                        ->get()->toArray();
+            ->where('periode_id', $periode)
+            ->groupBy('gelombang')
+            ->get()->toArray();
 
         $jalur_pendaftaran = DB::table('pendaftar')->select('jalur', DB::raw('COUNT(*) as jumlah'))
-                        ->where('periode_id', $periode)
-                        ->groupBy('jalur')
-                        ->get()->toArray();
+            ->where('periode_id', $periode)
+            ->groupBy('jalur')
+            ->get()->toArray();
 
         $prodi_lulus = DB::table('maba')->select('prodi_lulus', DB::raw('COUNT(*) as jumlah'))
-                        ->where('periode_id', $periode)
-                        ->where('prodi_lulus', "!=", null)
-                        ->groupBy('prodi_lulus')
-                        ->get()->toArray();
+            ->where('periode_id', $periode)
+            ->where('prodi_lulus', "!=", null)
+            ->groupBy('prodi_lulus')
+            ->get()->toArray();
 
         $prodi_1 = DB::table('pendaftar')->select('prodi_1', DB::raw('COUNT(*) as jumlah'))
-                        ->where('periode_id', $periode)
-                        ->groupBy('prodi_1')
-                        ->get()->toArray();
+            ->where('periode_id', $periode)
+            ->groupBy('prodi_1')
+            ->get()->toArray();
 
         $prodi_2 = DB::table('pendaftar')->select('prodi_2', DB::raw('COUNT(*) as jumlah'))
-                        ->where('periode_id', $periode)
-                        ->groupBy('prodi_2')
-                        ->get()->toArray();
+            ->where('periode_id', $periode)
+            ->groupBy('prodi_2')
+            ->get()->toArray();
 
         $sheets = new SheetCollection([
             'bayar_pendaftaran' => $bayar_pendaftaran,
@@ -137,15 +143,14 @@ class GrafikController extends Controller
             'prodi_pilihan_2' => $prodi_2
         ]);
 
-        $filename = 'export_simaru_'.date('dmY').'.xlsx';
+        $filename = 'export_simaru_' . date('dmY') . '.xlsx';
 
-        (new FastExcel($sheets))->export('storage/export/'.$filename);
+        (new FastExcel($sheets))->export('storage/export/' . $filename);
 
-        $filePath = public_path("storage/export/".$filename);
+        $filePath = public_path("storage/export/" . $filename);
 
         $headers = ['Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
 
         return response()->download($filePath, $filename, $headers);
-
     }
 }
