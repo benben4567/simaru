@@ -16,9 +16,9 @@ class NimController extends Controller
         if ($request->ajax()) {
             $periode = Periode::where('status', 'buka')->first();
             $maba = Maba::select('no_pendaftaran', 'nama', 'prodi_lulus', 'gelombang', 'jalur_pendaftaran', 'nim', 'tgl_nim')
-                    ->where('periode_id', $periode->id)
-                    ->where('pembayaran', 'lunas')
-                    ->get();
+                ->where('periode_id', $periode->id)
+                ->where('pembayaran', 'lunas')
+                ->get();
             return ResponseFormatter::success($maba, "Data Maba");
         }
         return view('pages.nim');
@@ -50,5 +50,32 @@ class NimController extends Controller
             Logger::error($maba, $e->getMessage());
             return ResponseFormatter::error($e->getMessage(), 'Terjadi Kesalahan di Server');
         }
+    }
+
+    public function searchNim(Request $request)
+    {
+        if ($request->ajax()) {
+
+            $validator = Validator::make($request->all(), [
+                "nomor" => 'required|integer',
+            ]);
+
+            if ($validator->fails()) {
+                return ResponseFormatter::error($validator->errors(), "Data tidak valid", 422);
+            }
+
+            $maba = Maba::select('no_pendaftaran', 'nama', 'prodi_lulus', 'nim', 'tgl_nim')
+                ->where('no_pendaftaran', request()->nomor)
+                ->where('pembayaran', 'lunas')
+                ->first();
+
+            if ($maba) {
+                return ResponseFormatter::success($maba, "Data Maba");
+            } else {
+                return ResponseFormatter::error(null, "Data tidak ditemukan", 404);
+            }
+        }
+
+        return view('pages.search_nim');
     }
 }

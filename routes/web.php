@@ -25,6 +25,7 @@ Auth::routes([
 Route::get('/grafik', [App\Http\Controllers\GrafikController::class, 'index'])->name('grafik');
 Route::get('/rekap', [App\Http\Controllers\GrafikController::class, 'rekap'])->name('rekap');
 Route::get('/export', [App\Http\Controllers\GrafikController::class, 'export'])->name('export');
+Route::get('/search-nim', [App\Http\Controllers\NimController::class, 'searchNim'])->name('search-nim');
 Route::get('/privacy-policy', function () {
     return view('pages.privacy-policy');
 });
