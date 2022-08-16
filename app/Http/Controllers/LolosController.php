@@ -155,7 +155,6 @@ class LolosController extends Controller
                         ->orderBy('prodi_lulus')
                         ->orderBy('no_pendaftaran')
                         ->get();
-        dd($data);
 
         $filename = 'simaru_lolos_'.date('dmY').".xlsx";
 
