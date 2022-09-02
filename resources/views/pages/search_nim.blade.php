@@ -115,7 +115,6 @@
                         $("#prodi").text(data.prodi_lulus);
                         if (data.nim == null) {
                             $("#nim").append('<span class="badge badge-danger">BELUM</span>');
-                            jqEle
                         } else {
                             $("#nim").text(data.nim);
                         }

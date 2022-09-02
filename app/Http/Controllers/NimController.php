@@ -66,7 +66,6 @@ class NimController extends Controller
 
             $maba = Maba::select('no_pendaftaran', 'nama', 'prodi_lulus', 'nim', 'tgl_nim')
                 ->where('no_pendaftaran', request()->nomor)
-                ->where('pembayaran', 'lunas')
                 ->first();
 
             if ($maba) {
