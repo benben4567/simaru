@@ -119,7 +119,7 @@ class LolosController extends Controller
 
     public function import(Request $request)
     {
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'file' => 'file|required|mimes:xlsx'
         ]);
 
@@ -132,7 +132,7 @@ class LolosController extends Controller
             $path = $request->file('file')->store('excel');
 
             // Import
-            $collection = (new FastExcel)->sheet(1)->import(storage_path('app/'. $path), function($line) {
+            $collection = (new FastExcel)->sheet(1)->import(storage_path('app/' . $path), function ($line) {
                 return Maba::where("no_pendaftaran", intval(trim($line['no_pendaftaran'])))->update([
                     "prodi_lulus" => $line['prodi_lulus'],
                     "nilai" => intval($line['nilai']),
@@ -142,22 +142,34 @@ class LolosController extends Controller
             });
 
             return ResponseFormatter::success($collection, "Data Berhasil Diimport", 201);
-
         } catch (\Exception $e) {
             return ResponseFormatter::error($e->getMessage(), 'Terjadi Kesalahan di Server');
         }
     }
 
+    public function chunkExport()
+    {
+        $data = Maba::cursor()->filter(function ($maba) {
+            return $maba->prodi_lulus != null;
+        });
+
+        foreach ($data as $maba) {
+            $temp = [
+                'No Pendaftaran' => $maba->no_pendaftaran,
+                'Nama' => $maba->nama,
+                'Peodi Lolos' => $maba->prodi_lulus,
+                'Jalur Pendaftaran' => $maba->jalur_pendaftaran,
+                'Gelombang' => $maba->gelombang,
+                'Tgl Lolos' => $maba->tgl_lulus
+            ];
+            yield $temp;
+        }
+    }
+
     public function export()
     {
-        $data = DB::table('maba')->select('no_pendaftaran', 'nama', 'prodi_lulus', 'jalur_pendaftaran', 'gelombang', 'tgl_lulus')
-                        ->whereNotNull('prodi_lulus')
-                        ->orderBy('prodi_lulus')
-                        ->orderBy('no_pendaftaran')
-                        ->get();
+        $filename = 'simaru_lolos_' . date('dmY') . ".xlsx";
 
-        $filename = 'simaru_lolos_'.date('dmY').".xlsx";
-
-        return (new FastExcel($data))->download($filename);
+        return (new FastExcel($this->chunkExport()))->download($filename);
     }
 }
